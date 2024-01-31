@@ -149,7 +149,7 @@ module.exports = {
     ],
     "upgrades": [
         {
-        "name": "Master ball",
+        "name": "Super ball",
         "logo": "icones/premierupgrade.jpg",
         "seuil": 1e3,
         "idcible": 1,
