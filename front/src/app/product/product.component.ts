@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Product } from '../world';
 
+
 @Component({
   selector: 'app-product',
   standalone: true,

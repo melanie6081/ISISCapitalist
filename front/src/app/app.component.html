@@ -1,18 +1,28 @@
 <div class = "header">
-  <div><img class="logo" [attr.src] = "backend+'/'+world.logo"/></div>
-  <div>{{world.name}}</div>
-  <div> argent </div>
-  <div> multiplicateur </div>
-  <div> ID du joueur </div>
+  <div><img class="logo" [attr.src] = "backend+'/'+world.logo"/><br>
+  {{world.name}}</div>
+  <div> {{world.money}} €</div>
+  <div> multiplicateur</div>
+  <div> 
+    <form class="example-form">
+      <input matInput placeholder="Nom du joueur">
+  </form>
+   </div>
 </div>
 
+
 <div class = "main">
-  <div> liste des boutons de menu </div>
+  <div class = "menu"> 
+    <button mat-raised-button> Managers </button><br>
+    <button mat-raised-button> Bonus </button><br>
+    <button mat-raised-button> Investisseurs </button><br>
+    <button mat-raised-button> Anges améliorations </button><br>
+    <button mat-raised-button> Argent améliorations </button>
+  </div>
   <div class = "products">
     @for (product of world.products; track product.id){
-      <div> <app-product [product]="product" [money]="world.money"/> </div>
+      <div> <app-product [product]="product" [money]="product.cout"/> </div>
     }
-   
     </div>
 </div>
 

@@ -8,7 +8,7 @@ import { BACKEND, GET_WORLD } from './Graphqhrequests';
 export class WebserviceService {
 
   server = BACKEND+'/graphql';
-  user = '';
+  user = ' ';
 
   constructor() { 
   }
