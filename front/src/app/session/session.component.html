@@ -12,12 +12,12 @@
         <div class="main">
             <div class="form">
                 <h2>Maître du monde</h2>
-                <form>
+                <form (ngSubmit)="onSubmit()">
                     <div class="user-box">
-                      <input type="text" id="pseudo" ngModel required="">
+                      <input type="text" name="pseudo" id="pseudo" [(ngModel)]="user.pseudo" required="">
                       <label>pseudonyme</label>
                     </div>
-                    <a type="submit" href="jeu">
+                    <a [routerLink]="['/jeu', user.pseudo]">
                         <span></span>
                         <span></span>
                         <span></span>

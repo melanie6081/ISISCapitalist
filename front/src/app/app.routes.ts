@@ -5,6 +5,6 @@ import { JeuComponent } from './jeu/jeu.component';
 
 export const routes: Routes = [
     {path : 'connexion', component:SessionComponent},
-    {path:'jeu', component: JeuComponent},
+    {path:'jeu/:pseudo', component: JeuComponent},
     {path: '',   redirectTo: '/connexion', pathMatch: 'full' }, // route par défaut page de connexion
 ];

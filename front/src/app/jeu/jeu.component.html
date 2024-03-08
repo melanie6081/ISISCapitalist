@@ -1,16 +1,22 @@
+
+<div class="stars"></div> 
 <div class = "header">
-    <div><img class="logo" [attr.src] = "backend+'/'+world.logo"/><br>
+    <div>
+      <img class="logo" [attr.src] = "backend+'/'+world.logo"/><br>
     {{world.name}}</div>
-    <div> {{world.money}} €</div>
+    <div> <span [innerHTML]="world.money | bigvalue"> </span>€</div>
     <div> multiplicateur</div>
-    <div> 
-      <form class="example-form">
-        <input matInput placeholder="Nom du joueur">
-    </form>
-     </div>
+    <div> {{pseudo}}
+        <br>
+        <a type="submit" href="connexion">
+            déconnexion
+        </a>
+       <!--<button type="submit"><img src="../../images/deconnexion-2.png" alt="déconnexion"></button>--> 
+    </div>
+
+
 </div>
-  
-  
+
 <div class = "main">
     <div class = "menu"> 
       <button mat-raised-button> Managers </button><br>
@@ -19,11 +25,12 @@
       <button mat-raised-button> Anges améliorations </button><br>
       <button mat-raised-button> Argent améliorations </button>
     </div>
+    
     <div class = "products">
       @for (product of world.products; track product.id){
-        <div><img class="logop" [attr.src]= "backend+'/'+product.logo"/></div>
-        <div> <app-product [product]="product" [money]="product.cout"/> </div>
+        <app-product [product]="product" [money]="product.cout"/>
       }
-      </div>
   
 </div>
+
+
