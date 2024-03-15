@@ -15,15 +15,5 @@ import { ProductComponent } from './product/product.component';
 })
 export class AppComponent {
 
-  world : World = new World()
-  backend = BACKEND
-  title = 'SleepyWorld'
 
-  constructor(private service : WebserviceService){
-    service.getWorld().then(
-      world => {
-        this.world = world.data.getWorld;
-        console.dir(this.world)
-      });
-  }
 }

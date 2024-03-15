@@ -1,0 +1,41 @@
+<div class="fond">
+    <div class="stars">
+
+      <div class = "header">
+
+        <div>
+          <img class="logo" [attr.src] = "backend+'/'+world.logo"/><br>
+        {{world.name}}</div>
+        <div> <span [innerHTML]="world.money | bigvalue"> </span>€</div>
+        <div> <button (click)="selecteur()">acheter x{{multiplicateur}}</button> </div>
+        <div><div>{{pseudo}}</div>
+          <br>
+          <a [routerLink]="['/connexion']">
+            Déconnexion
+          </a>
+          
+        <!--<button type="submit"><img src="../../images/deconnexion-2.png" alt="déconnexion"></button>--> 
+      </div>
+    </div>
+      
+
+
+      <div class = "main">
+      <div class = "menu"> 
+        <button mat-raised-button> Managers </button><br>
+        <button mat-raised-button> Bonus </button><br>
+        <button mat-raised-button> Investisseurs </button><br>
+        <button mat-raised-button> Anges améliorations </button><br>
+        <button mat-raised-button> Argent améliorations </button>
+      </div>
+
+      <div class = "products">
+        @for (product of world.products; track product.id){
+          <app-product [product]="product" [money]="product.cout"/>
+        }
+
+      </div>
+
+    </div> 
+
+</div>

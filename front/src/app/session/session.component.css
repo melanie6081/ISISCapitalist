@@ -1,0 +1,267 @@
+body {
+    background-color: #333;
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 35px;
+  }
+  
+  path {
+    fill: transparent;
+  }
+  
+  text {
+    fill: aliceblue;
+  }
+
+div{
+    text-align: center;
+    align-items: center;
+    vertical-align: bottom;
+}
+
+.page{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(#1a0754,RoyalBlue);
+    
+}
+
+.stars{
+    
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    background: url(http://www.script-tutorials.com/demos/360/images/stars.png)          
+        repeat top center;
+    z-index: 0;
+    
+}
+
+.moon {
+    margin-top: 725px;
+    margin-left: 300px;
+    color: #ffd;
+    background: radial-gradient(
+      circle at -30% 50%,
+      rgba(0, 0, 0, 0) 175px,
+      currentColor 100%
+    );
+    z-index: 999;
+    border-radius: 50%;
+    height: 200px;
+    width: 200px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    filter: drop-shadow(0 0 20px currentColor);
+  }
+
+.header{
+    padding: 50px;
+    height: 35%;
+    display:grid;
+    grid-template-rows: 20% 60% 20%;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.logo{
+    width : 150px;
+    height : 150px;
+    border-radius : 75px;
+}
+
+.text1{
+    margin-top: 20%;
+    font-family: fantasy;
+    font-size: xxx-large;
+    font-weight: 900;
+    color: aliceblue;
+    
+
+}
+
+.text2{
+    margin-bottom: 20%;
+    font-family: fantasy;
+    font-size: x-large;
+    font-weight: bold;
+    color: aliceblue;
+
+}
+
+.main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    height: 300px;
+    width: 400px;
+    padding: 40px;
+    transform: translate(-50%, -50%);
+    background: rgba(4, 0, 20, 0.5);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0,0,0,.6);
+    border-radius: 10px;
+  }
+
+  .form h2 {
+    margin: 0 0 30px;
+    padding: 0;
+    color: aliceblue;
+    text-align: center;
+  }
+
+  .form .user-box {
+    position: relative;
+    margin-top: 20%;
+  }
+  
+  .form .user-box input {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: aliceblue;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid aliceblue;
+    outline: none;
+    background: transparent;
+  }
+
+  .form .user-box label {
+    position: absolute;
+    top:0;
+    left: 0;
+    padding: 10px 0;
+    font-size: 16px;
+    color: aliceblue;
+    pointer-events: none;
+    transition: .5s;
+  }
+
+.form .user-box input:focus ~ label,
+.form .user-box input:valid ~ label {
+  top: -20px;
+  left: 0;
+  color: #03e9f4;
+  font-size: 12px;
+}
+
+.form form a {
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  color: #03e9f4;
+  font-size: 16px;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: .5s;
+  margin-top: 40px;
+  letter-spacing: 4px
+}
+
+.form a:hover {
+  background: #03e9f4;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #03e9f4,
+              0 0 25px #03e9f4,
+              0 0 50px #03e9f4,
+              0 0 100px #03e9f4;
+}
+
+.form a span {
+  position: absolute;
+  display: block;
+}
+
+.form a span:nth-child(1) {
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #03e9f4);
+  animation: btn-anim1 4s linear infinite;
+}
+
+@keyframes btn-anim1 {
+  0% {
+    left: -100%;
+  }
+  50%,100% {
+    left: 100%;
+  }
+}
+
+.form a span:nth-child(2) {
+  top: -100%;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, #03e9f4);
+  animation: btn-anim2 4s linear infinite;
+  animation-delay: 1s
+}
+
+@keyframes btn-anim2 {
+  0% {
+    top: -100%;
+  }
+  50%,100% {
+    top: 100%;
+  }
+}
+
+.form a span:nth-child(3) {
+  bottom: 0;
+  right: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, #03e9f4);
+  animation: btn-anim3 4s linear infinite;
+  animation-delay: 2s
+}
+
+@keyframes btn-anim3 {
+  0% {
+    right: -100%;
+  }
+  50%,100% {
+    right: 100%;
+  }
+}
+
+.form a span:nth-child(4) {
+  bottom: -100%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, #03e9f4);
+  animation: btn-anim4 4s linear infinite;
+  animation-delay: 3s
+}
+
+@keyframes btn-anim4 {
+  0% {
+    bottom: -100%;
+  }
+  50%,100% {
+    bottom: 100%;
+  }
+}
+  
+
+

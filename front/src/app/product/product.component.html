@@ -1,1 +1,15 @@
-<p>{{product.name}}</p>
+
+<div class="products">
+    <button type="button" class="prod" (click)="startFabrication()"><img class="logop" [attr.src]= "backend+'/'+product.logo"/></button>
+    <button> <p>{{product.id}} {{product.name}} {{product.cout}}€</p> </button>
+    <mat-progress-bar class="progressbar" [value]="progressbarvalue"></mat-progress-bar>
+    <!--<app-my-progress-bar [run]="run" [auto]="auto"
+            frontcolor="#008800"
+            backcolor="#FFFFFF"
+            [orientation]="orientation" 
+            [vitesse]="vitesse"
+            [initialValue]="initialValue">
+    </app-my-progress-bar>-->
+
+</div>
+

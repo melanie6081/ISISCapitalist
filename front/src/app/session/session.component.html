@@ -1,0 +1,37 @@
+<div class="page">
+    <div class="moon"></div>
+    <div class="stars">
+        
+        <div class="header">
+            <div class="text1">Bienvenue</div>
+            <div><img class="logo" [src] = "backend+'/'+world.logo"/></div>
+            <div class="text2">{{world.name}}</div>
+        </div>
+
+        
+
+        <div class="main">
+            <div class="form">
+                <h2>Maître du monde</h2>
+                <form (ngSubmit)="onSubmit()">
+                    <div class="user-box">
+                      <input type="text" name="pseudo" id="pseudo" [(ngModel)]="user.pseudo" required="">
+                      <label>pseudonyme</label>
+                    </div>
+                    <a [routerLink]="['/jeu', user.pseudo]">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                      Jouer
+                    </a>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
