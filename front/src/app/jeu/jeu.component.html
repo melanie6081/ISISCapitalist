@@ -7,8 +7,8 @@
           <img class="logo" [attr.src] = "backend+'/'+world.logo"/><br>
         {{world.name}}</div>
         <div> <span [innerHTML]="world.money | bigvalue"> </span>€</div>
-        <div> <button>acheter x{{multiplicateur}}</button> </div>
-        <div><div (click)="log()">{{pseudo}}</div>
+        <div> <button (click)="selecteur()">acheter x{{multiplicateur}}</button> </div>
+        <div><div>{{pseudo}}</div>
           <br>
           <a [routerLink]="['/connexion']">
             Déconnexion

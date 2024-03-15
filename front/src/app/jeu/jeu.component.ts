@@ -21,6 +21,7 @@ import { switchMap } from 'rxjs';
     imports: [RouterOutlet, ProductComponent, SessionComponent, BigvaluePipe, RouterLink],
 })
 export class JeuComponent implements OnInit{
+
 log() {
 console.log("coucou")
 }
@@ -49,6 +50,28 @@ console.log("coucou")
     this.pseudo = this.route.snapshot.params["pseudo"]
     console.log(this.pseudo)
   }
+
+  selecteur(): number{
+    if(this.multiplicateur==1){
+      this.multiplicateur = 10
+      console.log(this.multiplicateur)
+      return this.multiplicateur
+    }
+    if(this.multiplicateur==10){
+      this.multiplicateur = 100
+      console.log(this.multiplicateur)
+      return this.multiplicateur
+    }
+    if(this.multiplicateur==100){
+      this.multiplicateur = 1
+      console.log(this.multiplicateur)
+      return this.multiplicateur
+    }
+
+    return this.multiplicateur
+
+    
+    }
 
 
 
