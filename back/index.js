@@ -1,3 +1,19 @@
+const fs = require('fs')
+
+
+async function readUserWorld(user) { 
+    try {
+    const data = await fs.promises.readFile("userworlds/"+ user + "-world.json");
+    return JSON.parse(data);
+    }
+    catch(error) {
+        console.log("monde de " + user + " pas trouvé")
+        console.log(error)
+    return world
+    }
+   }
+
+
 const express = require('express');
 const {ApolloServer, gql} = require('apollo-server-express');
 
@@ -11,7 +27,8 @@ const resolvers = require("./resolvers")
 const server = new ApolloServer({
     typeDefs, resolvers,
     context: async ({ req }) => ({
-    world: world
+    world: await readUserWorld(req.headers["x-user"]),
+    user: req.headers["x-user"]
     })
    });
    

@@ -49,6 +49,7 @@ type World {
 
 type Query {
     getWorld: World
+    
 }
 
 type Mutation {

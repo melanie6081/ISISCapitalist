@@ -1,7 +1,7 @@
 module.exports = {
     "name": "Slippy capitalist",
     "logo": "icones/logomonde.jpg",
-    "money": 0,
+    "money": 100000,
     "score": 0,
     "totalangels": 0,
     "activeangels": 0,
@@ -16,10 +16,10 @@ module.exports = {
             "croissance": 1.07,
             "revenu": 6,
             "vitesse": 1,
-            "quantite": 1,
-            "timeleft": 1,
+            "quantite": 0,
+            "timeleft": 0,
             "managerUnlocked": false,
-            "upgrades": [
+            "paliers": [
                 {
                     "name": "Benef de pokeball x3",
                     "logo": "icones/pokeball.png",
@@ -56,11 +56,11 @@ module.exports = {
             "cout": 8000,
             "croissance": 1.07,
             "revenu": 9000,
-            "vitesse": 30,
-            "quantite": 1,
-            "timeleft": 1,
+            "vitesse": 3,
+            "quantite": 0,
+            "timeleft": 0,
             "managerUnlocked": false,
-            "palliers": [
+            "paliers": [
                 {
                     "name": "Benef Lit x3",
                     "logo": "icones/lit.png",
@@ -92,6 +92,17 @@ module.exports = {
         },
     ],
     "allunlocks": [
+        {
+        "name": "Nom du premier unlock général",
+        "logo": "icones/premierunlock.jpg",
+        "seuil": 30,
+        "idcible": 0,
+        "ratio": 2,
+        "typeratio": "gain",
+        "unlocked": "false"
+        },
+        ], 
+    "upgrades": [
         {
             "name": "Benef de pokeball x3",
             "logo": "icones/pokeball.png",
@@ -146,62 +157,6 @@ module.exports = {
             "typeratio": "gain",
             "unlocked": "false"
         },
-    ],
-    "upgrades": [
-        {
-        "name": "Super ball",
-        "logo": "icones/premierupgrade.jpg",
-        "seuil": 1e3,
-        "idcible": 1,
-        "ratio": 3,
-        "typeratio": "gain",
-        "unlocked": "false"
-        },
-        {
-        "name": "Hyper ball",
-        "logo": "icones/premierupgrade.jpg",
-        "seuil": 1e6,
-        "idcible": 1,
-        "ratio": 3,
-        "typeratio": "gain",
-        "unlocked": "false"
-        },
-        {
-            "name": "Master ball",
-            "logo": "icones/premierupgrade.jpg",
-            "seuil": 1e9,
-            "idcible": 1,
-            "ratio": 3,
-            "typeratio": "gain",
-            "unlocked": "false"
-        },
-        {
-            "name": "Master ball",
-            "logo": "icones/premierupgrade.jpg",
-            "seuil": 1e9,
-            "idcible": 1,
-            "ratio": 3,
-            "typeratio": "gain",
-            "unlocked": "false"
-        },
-        {
-            "name": "Master ball",
-            "logo": "icones/premierupgrade.jpg",
-            "seuil": 1e9,
-            "idcible": 1,
-            "ratio": 3,
-            "typeratio": "gain",
-            "unlocked": "false"
-        },
-        {
-            "name": "Master ball",
-            "logo": "icones/premierupgrade.jpg",
-            "seuil": 1e9,
-            "idcible": 1,
-            "ratio": 3,
-            "typeratio": "gain",
-            "unlocked": "false"
-        },
     ],   
         "angelupgrades": [
             {
@@ -235,7 +190,7 @@ module.exports = {
             "managers": [
                 {
                     "name": "Ronflexe",
-                    "logo": "image/joe-biden-435-1250d33329cb405e90dd3ddeb92c2e97.jpg",
+                    "logo": "icones\ronflexe.png",
                     "seuil": 10,
                     "idcible": 1,
                     "ratio": 0,
@@ -244,7 +199,7 @@ module.exports = {
                 },
                 {
                     "name": "Abel Auboisdormant",
-                    "logo": "icones/WangariMaathai.jpg",
+                    "logo": "icones/sleepy.jpg",
                     "seuil": 1000,
                     "idcible": 2,
                     "ratio": 0,
