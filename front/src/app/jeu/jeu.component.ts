@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap, Router, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { WebserviceService } from '../webservice.service';
 import { OperationTypeNode } from 'graphql';
 import { BACKEND } from '../Graphqhrequests';
@@ -18,14 +18,19 @@ import { switchMap } from 'rxjs';
     standalone: true,
     templateUrl: './jeu.component.html',
     styleUrl: './jeu.component.css',
-    imports: [RouterOutlet, ProductComponent, SessionComponent, BigvaluePipe,],
+    imports: [RouterOutlet, ProductComponent, SessionComponent, BigvaluePipe, RouterLink],
 })
 export class JeuComponent implements OnInit{
+log() {
+console.log("coucou")
+}
   
   user : User = new User()
   world : World = new World()
   backend = BACKEND
   pseudo = ""
+
+  multiplicateur = 1
 
 
 

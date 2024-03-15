@@ -17,6 +17,9 @@ import { FormsModule } from '@angular/forms';
 })
 
 export class SessionComponent implements OnInit{
+log() {
+console.log("coucou");
+}
 
   user: User = new User()
   world : World = new World()
