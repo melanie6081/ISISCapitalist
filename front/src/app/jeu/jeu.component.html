@@ -7,7 +7,7 @@
           <img class="logo" [attr.src] = "backend+'/'+world.logo"/><br>
         {{world.name}}</div>
         <div> <span [innerHTML]="world.money | bigvalue"> </span>€</div>
-        <div> <button (click)="selecteur()">acheter x{{multiplicateur}}</button> </div>
+        <div> <button (click)="selecteur()">achat {{multiplicateur}}</button> </div>
         <div class="deconnexion"><div>{{pseudo}}</div>
       
             <a [routerLink]="['/connexion']">
@@ -25,11 +25,11 @@
       
 
 
-      <div class = "main">
+    <div class = "main">
 
 
       <div class = "menu"> 
-        <button mat-raised-button> Managers </button><br>
+        <button mat-raised-button (click)="show()"> Managers </button><br>
         <button mat-raised-button> Bonus </button><br>
         <button mat-raised-button> Investisseurs </button><br>
         <button mat-raised-button> Anges améliorations </button><br>
@@ -42,6 +42,50 @@
         }
 
       </div>
+
+      <div *ngIf="showManagers" class="modal">
+        <div><h1 class="title">Managers make you feel better !</h1></div>
+        <div>
+          @for (manager of world.managers; track manager.idcible){
+            <div>
+              <div class="logo"><img class="managerlogo" [attr.src]="backend+'/'+manager.logo" /></div>
+              <div>
+                <div class="managername"> {{ manager.name}} </div>
+                <div class="managercible"> {{ world.products[manager.idcible-1].name }} </div>
+                <div class="managercost"> {{ manager.seuil}} </div>
+              </div>
+              <div>Hire !</div>
+            </div>
+          }
+        </div> 
+        </div>
+        <!--<div class="managers">
+          @for (manager of world.managers; track manager.idcible){
+            <img  class="managerlogo" [attr.src]= "backend+'/'+manager.logo"/>
+            {{manager.name}}
+          }
+        </div>-->
+        <!--<div>
+        <div *ngFor="let manager of world.managers.palier">
+        <div *ngIf="!manager.unlocked" class="managerslayout">
+        <div>
+        <div class="logo"><img class="round" [attr.src]="backend+'/'+manager.logo" /> </div>
+        </div>
+        <div>
+        <div class="managername"> {{ manager.name}} </div>
+        <div class="managercible"> {{ world.products.product[manager.idcible-
+        1].name }} </div>
+        <div class="managercost"> {{ manager.seuil}} </div>
+      </div>
+      <div>
+      <div class="hirebutton" (click)="hireManager(manager)"[ngClass]="{'selectable' : (world.money >= manager.seuil)}">Hire !</div>
+      </div>
+      </div>
+      </div>
+      <button class="closebutton" mat-raised-
+      button color="primary" (click)="showManagers = !showManagers">Close</button>
+    </div>
+    </div>-->
 
     </div> 
 

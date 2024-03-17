@@ -10,6 +10,7 @@ import { SessionComponent } from '../session/session.component';
 import { User } from '../session/user';
 import { BigvaluePipe } from "../bigvalue.pipe";
 import { switchMap } from 'rxjs';
+import { NgIf, NgFor} from '@angular/common';
 
 
 
@@ -18,7 +19,7 @@ import { switchMap } from 'rxjs';
     standalone: true,
     templateUrl: './jeu.component.html',
     styleUrl: './jeu.component.css',
-    imports: [RouterOutlet, ProductComponent, SessionComponent, BigvaluePipe, RouterLink],
+    imports: [RouterOutlet, ProductComponent, SessionComponent, BigvaluePipe, RouterLink, NgIf, NgFor],
 })
 export class JeuComponent implements OnInit{
 
@@ -30,8 +31,12 @@ console.log("coucou")
   world : World = new World()
   backend = BACKEND
   pseudo = ""
+  produit : Product = new Product()
 
-  multiplicateur = 1
+  multiplicateur = "x1"
+  multivalue = 1
+
+  showManagers = false
 
 
 
@@ -51,19 +56,31 @@ console.log("coucou")
     console.log(this.pseudo)
   }
 
-  selecteur(): number{
-    if(this.multiplicateur==1){
-      this.multiplicateur = 10
+  selecteur(): string{
+    if(this.multiplicateur=="x1"){
+      this.multiplicateur = "x10"
       console.log(this.multiplicateur)
       return this.multiplicateur
     }
-    if(this.multiplicateur==10){
-      this.multiplicateur = 100
+    if(this.multiplicateur=="x10"){
+      this.multiplicateur = "x100"
       console.log(this.multiplicateur)
       return this.multiplicateur
     }
-    if(this.multiplicateur==100){
-      this.multiplicateur = 1
+    if(this.multiplicateur=="x100"){
+      this.multiplicateur = "prochain palier"
+      console.log(this.multiplicateur)
+      return this.multiplicateur
+    }
+
+    if(this.multiplicateur=="prochain palier"){
+      this.multiplicateur = "max"
+      console.log(this.multiplicateur)
+      return this.multiplicateur
+    }
+
+    if(this.multiplicateur=="max"){
+      this.multiplicateur = "x1"
       console.log(this.multiplicateur)
       return this.multiplicateur
     }
@@ -74,6 +91,17 @@ console.log("coucou")
   onProductionDone(p: Product) {
     this.world.money = this.world.money + (p.revenu * p.quantite)
     this.world.score = this.world.score + (p.revenu * p.quantite)
+  }
+
+  show():boolean{
+    if(this.showManagers==true){
+      return this.showManagers=false
+    }
+    if(this.showManagers==false){
+      return this.showManagers=true
+    }
+
+    return this.showManagers
   }
 
 
