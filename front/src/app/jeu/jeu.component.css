@@ -54,5 +54,20 @@ div{
     background-color: aliceblue;
 }
 
+.deconnexion{
+    display: flex;
+    justify-content: center;
+    /*flex-direction: column;*/
+}
+
+.deconnexionlogo{
+    height: 30px;
+    width: 30px;
+    background-image: url(deconnexion.svg);
+    background-size: cover;
+    margin: 10px;
+    /*margin: auto;*/
+}
+
 
 

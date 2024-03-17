@@ -8,11 +8,16 @@
         {{world.name}}</div>
         <div> <span [innerHTML]="world.money | bigvalue"> </span>€</div>
         <div> <button (click)="selecteur()">acheter x{{multiplicateur}}</button> </div>
-        <div><div>{{pseudo}}</div>
-          <br>
-          <a [routerLink]="['/connexion']">
-            Déconnexion
-          </a>
+        <div class="deconnexion"><div>{{pseudo}}</div>
+      
+            <a [routerLink]="['/connexion']">
+              <div  class="deconnexionlogo" >
+                <span> </span>
+              </div>
+              
+            </a>
+
+          
           
         <!--<button type="submit"><img src="../../images/deconnexion-2.png" alt="déconnexion"></button>--> 
       </div>
@@ -21,6 +26,8 @@
 
 
       <div class = "main">
+
+
       <div class = "menu"> 
         <button mat-raised-button> Managers </button><br>
         <button mat-raised-button> Bonus </button><br>
@@ -31,7 +38,7 @@
 
       <div class = "products">
         @for (product of world.products; track product.id){
-          <app-product [product]="product" [money]="product.cout"/>
+          <app-product [product]="product" [money]="product.cout" (notifyProduction)="onProductionDone($event)"/>
         }
 
       </div>

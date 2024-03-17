@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Product} from '../world';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { BACKEND } from '../Graphqhrequests';
@@ -33,6 +33,9 @@ export class ProductComponent implements OnInit{
   progressbarvalue: number = 0;
   backend = BACKEND;
 
+  @Output() 
+  notifyProduction: EventEmitter<Product> = new EventEmitter<Product>();
+
 
   ngOnInit(){
     setInterval(() => { this.calcScore(); }, 100);
@@ -48,6 +51,8 @@ export class ProductComponent implements OnInit{
       this.progressbarvalue = 0
 
       // + cout prod plus tard 
+      // on prévient le composant parent que ce produit a généré son revenu.
+      this.notifyProduction.emit(this.product);
      }
      if(this.product.timeleft>0){
       this.progressbarvalue = ((this.product.vitesse - this.product.timeleft)/this.product.vitesse)*100

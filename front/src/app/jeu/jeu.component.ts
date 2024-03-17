@@ -3,7 +3,7 @@ import { ActivatedRoute, ParamMap, Router, RouterLink, RouterOutlet } from '@ang
 import { WebserviceService } from '../webservice.service';
 import { OperationTypeNode } from 'graphql';
 import { BACKEND } from '../Graphqhrequests';
-import { World } from '../world';
+import { Product, World } from '../world';
 import { ProductComponent } from '../product/product.component';
 import { Title } from '@angular/platform-browser';
 import { SessionComponent } from '../session/session.component';
@@ -69,9 +69,12 @@ console.log("coucou")
     }
 
     return this.multiplicateur
+  }
 
-    
-    }
+  onProductionDone(p: Product) {
+    this.world.money = this.world.money + (p.revenu * p.quantite)
+    this.world.score = this.world.score + (p.revenu * p.quantite)
+  }
 
 
 
