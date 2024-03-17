@@ -44,6 +44,7 @@
       </div>
 
       <div *ngIf="showManagers" class="modal">
+        <button class="closebutton" mat-raised-button color="primary" (click)="showManagers = !showManagers">Close</button>
         <div><h1 class="title">Managers make you feel better !</h1></div>
         <div>
           @for (manager of world.managers; track manager.idcible){
@@ -58,6 +59,7 @@
             </div>
           }
         </div> 
+        
         </div>
         <!--<div class="managers">
           @for (manager of world.managers; track manager.idcible){
