@@ -3,14 +3,16 @@ import { ActivatedRoute, ParamMap, Router, RouterLink, RouterOutlet } from '@ang
 import { WebserviceService } from '../webservice.service';
 import { OperationTypeNode } from 'graphql';
 import { BACKEND } from '../Graphqhrequests';
-import { Product, World } from '../world';
+import { Palier, Product, World } from '../world';
 import { ProductComponent } from '../product/product.component';
 import { Title } from '@angular/platform-browser';
 import { SessionComponent } from '../session/session.component';
 import { User } from '../session/user';
 import { BigvaluePipe } from "../bigvalue.pipe";
 import { switchMap } from 'rxjs';
-import { NgIf, NgFor} from '@angular/common';
+import { NgIf, NgFor, NgClass} from '@angular/common';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatBadgeModule } from '@angular/material/badge';
 
 
 
@@ -19,7 +21,7 @@ import { NgIf, NgFor} from '@angular/common';
     standalone: true,
     templateUrl: './jeu.component.html',
     styleUrl: './jeu.component.css',
-    imports: [RouterOutlet, ProductComponent, SessionComponent, BigvaluePipe, RouterLink, NgIf, NgFor],
+    imports: [RouterOutlet, ProductComponent, SessionComponent, BigvaluePipe, RouterLink, NgIf, NgFor, NgClass, MatBadgeModule],
 })
 export class JeuComponent implements OnInit{
 
@@ -38,10 +40,10 @@ console.log("coucou")
 
   showManagers = false
 
-
+  badgeManagers = 0
 
   constructor(private service : WebserviceService,private title:Title,  private route: ActivatedRoute,
-    private router: Router){
+    private router: Router, private snackBar: MatSnackBar){
     service.getWorld().then(
       world => {
         this.world = world.data.getWorld;
@@ -52,6 +54,7 @@ console.log("coucou")
 
 
   ngOnInit() {
+    this.managerCanBuy()
     this.pseudo = this.route.snapshot.params["pseudo"]
     console.log(this.pseudo)
   }
@@ -104,6 +107,30 @@ console.log("coucou")
     return this.showManagers
   }
 
+  hireManager(m: Palier) {
+    if(m.seuil>this.world.money){
+    return
+    }
+    else{
+    this.world.money-=m.seuil
+    m.unlocked=true
+    this.produit.managerUnlocked=true
+    let message = "Bien joué, votre production n'en sera que meilleure ;P"
+    this.popMessage(message)
+    }
+  }
 
+  popMessage(message : string) : void {
+    this.snackBar.open(message,"",{duration:3000});
+  }
+
+  managerCanBuy(){
+    for(let m of this.world.managers){
+      if(!m.unlocked && m.seuil<this.world.money){
+        this.badgeManagers+=1
+      }
+
+    }
+  }
 
 }

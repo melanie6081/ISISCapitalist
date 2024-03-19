@@ -43,30 +43,39 @@ export class ProductComponent implements OnInit{
   
   calcScore() {
     let temps_passe = Date.now() - this.lastupdate
-    if (this.product.timeleft==0){return}
-    else {
-     this.product.timeleft = this.product.timeleft - temps_passe
-     if(this.product.timeleft<=0){
-      this.product.timeleft = 0
-      this.progressbarvalue = 0
-
-      // + cout prod plus tard 
-      // on prévient le composant parent que ce produit a généré son revenu.
-      this.notifyProduction.emit(this.product);
-     }
-     if(this.product.timeleft>0){
-      this.progressbarvalue = ((this.product.vitesse - this.product.timeleft)/this.product.vitesse)*100
-     }
+    if(!this.product.managerUnlocked){
+      if (this.product.timeleft==0){return}
+      else {
+        this.product.timeleft = this.product.timeleft - temps_passe
+        if(this.product.timeleft<=0){
+          this.product.timeleft = 0
+          this.progressbarvalue = 0
+          
+          // + cout prod plus tard 
+          // on prévient le composant parent que ce produit a généré son revenu.
+          this.notifyProduction.emit(this.product);
+        }
+        if(this.product.timeleft>0){
+          this.progressbarvalue = ((this.product.vitesse - this.product.timeleft)/this.product.vitesse)*100
+        }
+      }
+    }else{
+      this.product.timeleft = this.product.timeleft - temps_passe
     }
+      
   }
 
   startFabrication(){
     console.log("fabrication")
+    
     if(this.product.quantite>0){
+      this.run=true
       this.product.timeleft = this.product.vitesse
       this.lastupdate = Date.now()
     }
- 
+
+    this.run=false
   }
+
 }
 
