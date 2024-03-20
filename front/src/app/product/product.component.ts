@@ -15,12 +15,38 @@ import { Orientation } from '../progressbar.component';
 
 export class ProductComponent implements OnInit{
 
+
+product : Product = new Product()
+
+max : number = 0
+
   @Input()
-  product : Product = new Product()
+    set prod(value: Product) {
+    this.product = value;
+
+  if(!this.product) this.product= new Product()
+   this.product.vitesse
+  }
 
   @Input()
   money : number = 0
-  
+
+  _qtmulti: string ="x1"
+  @Input()
+    set qtmulti(value: string) {
+    this._qtmulti = value;
+    if (this._qtmulti && this.product) this.calcMaxCanBuy();
+  }
+
+  _worldmoney : number = 0
+  @Input()
+    set worldmoney(value: number) {
+    this._worldmoney = value;
+    if (this._worldmoney && this.product) this.calcMaxCanBuy();
+  }
+
+
+      
   vitesse : number = this.product.vitesse
   run : boolean = false
   initialValue : number = 0 
@@ -40,9 +66,14 @@ export class ProductComponent implements OnInit{
   ngOnInit(){
     setInterval(() => { this.calcScore(); }, 100);
   }
+
+  maxnb(){
+    console.log(this.max)
+  }
   
   calcScore() {
     let temps_passe = Date.now() - this.lastupdate
+    this.lastupdate= Date.now()
     if(!this.product.managerUnlocked){
       if (this.product.timeleft==0){return}
       else {
@@ -72,9 +103,14 @@ export class ProductComponent implements OnInit{
       this.run=true
       this.product.timeleft = this.product.vitesse
       this.lastupdate = Date.now()
+   
     }
-
     this.run=false
+  }
+
+  calcMaxCanBuy() {
+    console.log(this._worldmoney)
+    this.max = Math.trunc((Math.log(1-((this._worldmoney/this.product.cout)*(1-this.product.croissance))))/Math.log(this.product.croissance))
   }
 
 }
