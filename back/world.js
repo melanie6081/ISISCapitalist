@@ -10,8 +10,8 @@ module.exports = {
     "products": [
         {
             "id": 1,
-            "name": "pokeball",
-            "logo": "icones/pokeball.png",
+            "name": "oreiller",
+            "logo": "icones/oreiller.png",
             "cout": 4,
             "croissance": 1.07,
             "revenu": 6,
@@ -21,8 +21,8 @@ module.exports = {
             "managerUnlocked": false,
             "paliers": [
                 {
-                    "name": "Benef de pokeball x3",
-                    "logo": "icones/pokeball.png",
+                    "name": "Benef de oreiller x3",
+                    "logo": "icones/oreiller.png",
                     "seuil": 25,
                     "idcible": 1,
                     "ratio": 3,
@@ -30,8 +30,8 @@ module.exports = {
                     "unlocked": "false"
                 },
                 {
-                    "name": "Vitesse pokeball x3",
-                    "logo": "icones/pokeball.png",
+                    "name": "Vitesse oreiller x3",
+                    "logo": "icones/oreiller.png",
                     "seuil": 50,
                     "idcible": 1,
                     "ratio": 3,
@@ -39,8 +39,8 @@ module.exports = {
                     "unlocked": "false"
                 },
                 {
-                    "name": "Benef de pokeball x3",
-                    "logo": "icones/pokeball.png",
+                    "name": "Benef de oreiller x3",
+                    "logo": "icones/oreiller.png",
                     "seuil": 100,
                     "idcible": 1,
                     "ratio": 3,
@@ -51,8 +51,8 @@ module.exports = {
         },
         {
             "id": 2,
-            "name": "Lit",
-            "logo": "icones/lit.png",
+            "name": "Bouchon d'oreilles",
+            "logo": "icones/bouchondoreille.png",
             "cout": 8000,
             "croissance": 1.07,
             "revenu": 9000,
@@ -62,32 +62,75 @@ module.exports = {
             "managerUnlocked": false,
             "paliers": [
                 {
-                    "name": "Benef Lit x3",
-                    "logo": "icones/lit.png",
+                    "name": "Benef bouchondoreille x3",
+                    "logo": "icones/bouchondoreille.png",
                     "seuil": 25,
-                    "idcible": 1,
+                    "idcible": 2,
                     "ratio": 3,
                     "typeratio": "gain",
                     "unlocked": "false"
                 },
                 {
-                    "name": "Vitesse Lit x3",
-                    "logo": "icones/lit.png",
+                    "name": "Vitesse bouchondoreille x3",
+                    "logo": "icones/bouchondoreille.png",
                     "seuil": 50,
-                    "idcible": 1,
+                    "idcible": 2,
                     "ratio": 3,
                     "typeratio": "vitesse",
                     "unlocked": "false"
                 },
                 {
-                    "name": "Benef Lit x3",
-                    "logo": "icones/lit.png",
+                    "name": "Benef bouchondoreille x3",
+                    "logo": "icones/bouchondoreille.png",
                     "seuil": 100,
-                    "idcible": 1,
+                    "idcible": 2,
                     "ratio": 3,
                     "typeratio": "gain",
                     "unlocked": "false"
                 },
+                
+            ]
+        },
+        {
+            "id": 3,
+            "name": "Lampe de chevet",
+            "logo": "icones/bouchondoreille.png",
+            "cout": 8000,
+            "croissance": 1.07,
+            "revenu": 9000,
+            "vitesse": 3,
+            "quantite": 0,
+            "timeleft": 0,
+            "managerUnlocked": false,
+            "paliers": [
+                {
+                    "name": "Benef lampe de chevet x3",
+                    "logo": "icones/bouchondoreille.png",
+                    "seuil": 25,
+                    "idcible": 3,
+                    "ratio": 3,
+                    "typeratio": "gain",
+                    "unlocked": "false"
+                },
+                {
+                    "name": "Vitesse lampe de chevet x3",
+                    "logo": "icones/bouchondoreille.png",
+                    "seuil": 50,
+                    "idcible": 3,
+                    "ratio": 3,
+                    "typeratio": "vitesse",
+                    "unlocked": "false"
+                },
+                {
+                    "name": "Benef lampe de chevet x3",
+                    "logo": "icones/bouchondoreille.png",
+                    "seuil": 100,
+                    "idcible": 3,
+                    "ratio": 3,
+                    "typeratio": "gain",
+                    "unlocked": "false"
+                },
+                
             ]
         },
     ],
@@ -104,8 +147,8 @@ module.exports = {
         ], 
     "upgrades": [
         {
-            "name": "Benef de pokeball x3",
-            "logo": "icones/pokeball.png",
+            "name": "Benef de oreiller x3",
+            "logo": "icones/oreiller.png",
             "seuil": 25,
             "idcible": 1,
             "ratio": 3,
@@ -113,8 +156,8 @@ module.exports = {
             "unlocked": "false"
         },
         {
-            "name": "Vitesse pokeball x3",
-            "logo": "icones/pokeball.png",
+            "name": "Vitesse oreiller x3",
+            "logo": "icones/oreiller.png",
             "seuil": 50,
             "idcible": 1,
             "ratio": 3,
@@ -122,8 +165,8 @@ module.exports = {
             "unlocked": "false"
         },
         {
-            "name": "Benef pokeball x3",
-            "logo": "icones/pokeball.png",
+            "name": "Benef oreiller x3",
+            "logo": "icones/oreiller.png",
             "seuil": 100,
             "idcible": 1,
             "ratio": 3,
@@ -131,8 +174,8 @@ module.exports = {
             "unlocked": "false"
         },
         {
-            "name": "Benef Lit x3",
-            "logo": "icones/lit.png",
+            "name": "Benef bouchondoreille x3",
+            "logo": "icones/bouchondoreille.png",
             "seuil": 25,
             "idcible": 1,
             "ratio": 3,
@@ -140,8 +183,8 @@ module.exports = {
             "unlocked": "false"
         },
         {
-            "name": "Vitesse Lit x3",
-            "logo": "icones/lit.png",
+            "name": "Vitesse bouchondoreille x3",
+            "logo": "icones/bouchondoreille.png",
             "seuil": 50,
             "idcible": 1,
             "ratio": 3,
@@ -149,8 +192,35 @@ module.exports = {
             "unlocked": "false"
         },
         {
-            "name": "Benef Lit x3",
-            "logo": "icones/lit.png",
+            "name": "Benef bouchondoreille x3",
+            "logo": "icones/bouchondoreille.png",
+            "seuil": 100,
+            "idcible": 1,
+            "ratio": 3,
+            "typeratio": "gain",
+            "unlocked": "false"
+        },
+        {
+            "name": "Benef de oreiller x3",
+            "logo": "icones/lampedechevet.png",
+            "seuil": 25,
+            "idcible": 1,
+            "ratio": 3,
+            "typeratio": "gain",
+            "unlocked": "false"
+        },
+        {
+            "name": "Vitesse lampe de chevet x3",
+            "logo": "icones/lampedechevet.png",
+            "seuil": 50,
+            "idcible": 1,
+            "ratio": 3,
+            "typeratio": "vitesse",
+            "unlocked": "false"
+        },
+        {
+            "name": "Benef lampe de chevet x3",
+            "logo": "icones/lampedechevet.png",
             "seuil": 100,
             "idcible": 1,
             "ratio": 3,
@@ -189,8 +259,8 @@ module.exports = {
         ],
             "managers": [
                 {
-                    "name": "Ronflexe",
-                    "logo": "icones\ronflexe.png",
+                    "name": "Abel Auboisdormant",
+                    "logo": "icones\abelauboisdormant.png",
                     "seuil": 10,
                     "idcible": 1,
                     "ratio": 0,
@@ -198,16 +268,23 @@ module.exports = {
                     "unlocked": "false"
                 },
                 {
-                    "name": "Abel Auboisdormant",
-                    "logo": "icones/sleepy.jpg",
+                    "name": "Cecile Encieux",
+                    "logo": "icones/cecileencieux.jpg",
                     "seuil": 1000,
                     "idcible": 2,
                     "ratio": 0,
                     "typeratio": "gain",
                     "unlocked": "false"
                 },
+                {
+                    "name": "Lucie Dité",
+                    "logo": "icones/luciedité.jpg",
+                    "seuil": 5000,
+                    "idcible": 3,
+                    "ratio": 0,
+                    "typeratio": "gain",
+                    "unlocked": "false"
+                },
 
             ],
-
-
 }
