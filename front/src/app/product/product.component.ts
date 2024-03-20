@@ -25,7 +25,7 @@ max : number = 0
     this.product = value;
 
   if(!this.product) this.product= new Product()
-   this.product.vitesse=10000
+   this.product.vitesse
   }
 
   @Input()
@@ -109,7 +109,8 @@ max : number = 0
   }
 
   calcMaxCanBuy() {
-    this.max = Math.trunc(((Math.log(1-((this._worldmoney/this.product.cout)*(1-this.product.croissance))))/Math.log(this.product.croissance))-1)
+    console.log(this._worldmoney)
+    this.max = Math.trunc((Math.log(1-((this._worldmoney/this.product.cout)*(1-this.product.croissance))))/Math.log(this.product.croissance))
   }
 
 }
