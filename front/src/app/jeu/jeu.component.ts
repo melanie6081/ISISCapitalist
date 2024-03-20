@@ -35,12 +35,13 @@ console.log("coucou")
   pseudo = ""
   produit : Product = new Product()
 
-  multiplicateur = "x1"
+  qtmulti = "x1"
   multivalue = 1
 
   showManagers = false
 
   badgeManagers = 0
+
 
   constructor(private service : WebserviceService,private title:Title,  private route: ActivatedRoute,
     private router: Router, private snackBar: MatSnackBar){
@@ -60,35 +61,35 @@ console.log("coucou")
   }
 
   selecteur(): string{
-    if(this.multiplicateur=="x1"){
-      this.multiplicateur = "x10"
-      console.log(this.multiplicateur)
-      return this.multiplicateur
+    if(this.qtmulti=="x1"){
+      this.qtmulti = "x10"
+      console.log(this.qtmulti)
+      return this.qtmulti
     }
-    if(this.multiplicateur=="x10"){
-      this.multiplicateur = "x100"
-      console.log(this.multiplicateur)
-      return this.multiplicateur
+    if(this.qtmulti=="x10"){
+      this.qtmulti = "x100"
+      console.log(this.qtmulti)
+      return this.qtmulti
     }
-    if(this.multiplicateur=="x100"){
-      this.multiplicateur = "prochain palier"
-      console.log(this.multiplicateur)
-      return this.multiplicateur
-    }
-
-    if(this.multiplicateur=="prochain palier"){
-      this.multiplicateur = "max"
-      console.log(this.multiplicateur)
-      return this.multiplicateur
+    if(this.qtmulti=="x100"){
+      this.qtmulti = "prochain palier"
+      console.log(this.qtmulti)
+      return this.qtmulti
     }
 
-    if(this.multiplicateur=="max"){
-      this.multiplicateur = "x1"
-      console.log(this.multiplicateur)
-      return this.multiplicateur
+    if(this.qtmulti=="prochain palier"){
+      this.qtmulti = "max"
+      console.log(this.qtmulti)
+      return this.qtmulti
     }
 
-    return this.multiplicateur
+    if(this.qtmulti=="max"){
+      this.qtmulti = "x1"
+      console.log(this.qtmulti)
+      return this.qtmulti
+    }
+
+    return this.qtmulti
   }
 
   onProductionDone(p: Product) {

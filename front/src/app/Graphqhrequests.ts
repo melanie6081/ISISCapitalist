@@ -1,8 +1,8 @@
 import {gql} from "@urql/core";
 
-//export const BACKEND = "https://isiscapitalistgraphql.kk.kurasawa.fr"
+export const BACKEND = "https://isiscapitalistgraphql.kk.kurasawa.fr"
 //https://isiscapitalistgraphql.kk.kurasawa.fr/graphql
-export const BACKEND = "http://localhost:4000"
+//export const BACKEND = "http://localhost:4000"
 // ne pas oublier de le lancer npm start
 //pour lancer front ng serve
 
