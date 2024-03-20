@@ -1,7 +1,10 @@
 
 <div class="products">
-    <button type="button" class="prod" (click)="startFabrication()"><img class="logop" [attr.src]= "backend+'/'+product.logo"/></button>
+    <div class="produit">
+    <!--<button type="button" class="prod" (click)="startFabrication()"><img class="logop" [attr.src]= "backend+'/'+product.logo"/></button>-->
+    <img (click)="startFabrication()" class="logop" [attr.src]= "backend+'/'+product.logo"/>
     <button> <p>{{product.id}} {{product.name}} {{product.cout}}€</p> </button>
+    </div>
     <mat-progress-bar class="progressbar" [value]="progressbarvalue"></mat-progress-bar>
     <!--<app-my-progress-bar [run]="run" [auto]="auto"
             frontcolor="#008800"
