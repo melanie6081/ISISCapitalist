@@ -13,38 +13,53 @@ function saveWorld(context) {
                     `Erreur d'écriture du monde coté serveur`)
             }
         })
+        updateScore(context)
+        context.world.lastupdate=Date.now().toString()
 }
 
 
 function calcQtProductionforElapseTime(product, elapsedTime) {
     let qt = 0;
-    let remainingTime = product.timeleft - elapsedTime;
-
     if (!product.managerUnlocked) {
-        if (product.timeleft !== 0 && remainingTime <= 0) {
+        if (product.timeleft !== 0 && (product.timeleft - elapsedTime) <= 0) {
             product.timeleft = 0;
             qt = 1;
-        } else if (product.timeleft !== 0 && remainingTime > 0) {
+        } else if (product.timeleft !== 0 && (product.timeleft - elapsedTime) > 0) {
             product.timeleft -= elapsedTime;
         }
     } else {
-        if (remainingTime < 0) {
-            let productionCycles = Math.floor(-remainingTime / product.vitesse);
-            product.timeleft = product.vitesse - (-remainingTime % product.vitesse);
+        if ((product.timeleft - elapsedTime) < 0) {
+            let productionCycles = Math.floor(-(product.timeleft - elapsedTime) / product.vitesse);
+            product.timeleft = product.vitesse - (-(product.timeleft - elapsedTime) % product.vitesse);
             qt = 1 + productionCycles;
-        } else if (remainingTime == 0) {
+        } else if ((product.timeleft - elapsedTime) == 0) {
             product.timeleft = product.vitesse;
             qt = 1;
         } else {
             product.timeleft -= elapsedTime;
         }
     }
-
     return qt;
 }
 
-    
 
+    
+function updateScore(context) {
+    let gain = 0
+    let angles = 0
+    context.world.products.forEach(p => {
+        let time = Date.now() - Number(context.world.lastupdate)
+        let qt = calcQtProductionforElapseTime(p, time)
+        gain += qt * p.revenu
+    })
+    
+    context.world.money += gain
+    context.world.score += gain
+    context.world.totalangels += 1
+
+    context.world.lastupdate = Date.now().toString()
+    
+}
 
 
 module.exports = {
@@ -56,7 +71,7 @@ module.exports = {
     },
     Mutation: {
         acheterQtProduit(parent, args, context) {
-            //updateScore(context)
+          updateScore(context)
           let product = context.world.products.find(p => p.id == args.id)
            
             if (!product) {
@@ -81,7 +96,7 @@ module.exports = {
             } 
         },
         lancerProductionProduit(parent, args, context){
-            //updateScore(context)
+            updateScore(context)
             let product = context.world.products.find(p => p.id == args.id)
             if (!product) {
                 throw new Error(
@@ -98,10 +113,9 @@ module.exports = {
             return product             
         },
         engagerManager(parent, args, context) {
-            //updateScore(context)
+            updateScore(context)
             let manager = context.world.managers.find(p => p.name == args.name)
             let product = context.world.products.find(p => p.id == manager.idcible)
-            let cout = context.world.managers.find(p => p.seuil == manager.seuil)
             if(!manager){
                 throw new Error(`Le manager nommé ${args.name} n'existe pas`)
             }
@@ -109,15 +123,56 @@ module.exports = {
                 let date = Date.now().toString()
                 manager.unlocked = true
                 product.managerUnlocked = true
-                context.world.money -= cout
                 context.world.lastupdate = date
                 saveWorld(context)
             }
             return manager
         },
+        acheterCashUpgrade(parent, args, context){
+            updateScore(contexte)
+            let upgrade = context.world.upgrades.find(p => p.id == args.id)
+            let product = context.world.products.find(p => p.id == upgrade.idcible)
+            if (!upgrade) {
+                throw new Error(
+                    `L'upgrade avec l'id ${args.id} n'existe pas`)
+            }
+            else{ 
+                
+                if (context.world.money >= args.sueil) {
+                    context.world.money -= args.prix
+                    upgrade.unlocked = true
+                    if(args.typeratio=="gain"){
+                        product.revenu = upgrade.ratio*product.revenu
+                    }
+                    if(args.typeratio=="vitesse"){
+                        product.revenu = product.vitesse/upgrade.ratio
+                    }
+                    saveWorld(context)
+                    return product
+                }
+                else{
+                    throw new Error(
+                        `Pas assez d'argent pour ${args.quantite} ${product.name}`)
+                }   
+            }
+
+        },
+        resetWorld(parent, args, context){
+            let world = require("./world")
+            context.world = world
+            world.totalangels = context.world.totalangels
+            world.activeangels = context.world.activeangels
+            saveWorld(context)
+            return world
+            
+
+          
+
+        }
+
+        
 
     }
-
     
 };
 

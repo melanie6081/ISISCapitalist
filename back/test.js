@@ -1,29 +1,28 @@
 function calcQtProductionforElapseTime(product, elapsedTime) {
     let qt = 0;
-    let remainingTime = product.timeleft - elapsedTime;
-
     if (!product.managerUnlocked) {
-        if (product.timeleft !== 0 && remainingTime <= 0) {
+        if (product.timeleft !== 0 && (product.timeleft - elapsedTime) <= 0) {
             product.timeleft = 0;
             qt = 1;
-        } else if (product.timeleft !== 0 && remainingTime > 0) {
+        } else if (product.timeleft !== 0 && (product.timeleft - elapsedTime) > 0) {
             product.timeleft -= elapsedTime;
         }
     } else {
-        if (remainingTime < 0) {
-            let productionCycles = Math.floor(-remainingTime / product.vitesse);
-            product.timeleft = product.vitesse - (-remainingTime % product.vitesse);
+        if ((product.timeleft - elapsedTime) < 0) {
+            let productionCycles = Math.floor(-(product.timeleft - elapsedTime) / product.vitesse);
+            product.timeleft = product.vitesse - (-(product.timeleft - elapsedTime) % product.vitesse);
             qt = 1 + productionCycles;
-        } else if (remainingTime == 0) {
+        } else if ((product.timeleft - elapsedTime) == 0) {
             product.timeleft = product.vitesse;
             qt = 1;
         } else {
             product.timeleft -= elapsedTime;
         }
     }
-
     return qt;
 }
+
+
 
 
 
@@ -62,6 +61,11 @@ let tests = [
             console.log("Timeleft incorrect pour le produit: " + JSON.stringify(t.p) + " avec un temps écoulé de " + t.elapseTime + "ms")
             console.log("attendu: " + t.timeleft+", obtenu: "+product.timeleft)
         }
-        
+        if (qt == t.qt) {
+           console.log("Quantité correct")
+        }
+        if (product.timeleft == t.timeleft) {
+            console.log("Timeleft correct")
+        }  
     })
     
