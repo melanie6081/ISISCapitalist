@@ -14,12 +14,11 @@ import { Orientation } from '../progressbar.component';
 })
 
 export class ProductComponent implements OnInit{
-  calcMaxCanBuy() {
-    
-  }
+
 
 product : Product = new Product()
 
+max : number = 0
 
   @Input()
     set prod(value: Product) {
@@ -67,6 +66,10 @@ product : Product = new Product()
   ngOnInit(){
     setInterval(() => { this.calcScore(); }, 100);
   }
+
+  maxnb(){
+    console.log(this.max)
+  }
   
   calcScore() {
     let temps_passe = Date.now() - this.lastupdate
@@ -103,6 +106,10 @@ product : Product = new Product()
    
     }
     this.run=false
+  }
+
+  calcMaxCanBuy() {
+    this.max = Math.trunc(((Math.log(1-((this._worldmoney/this.product.cout)*(1-this.product.croissance))))/Math.log(this.product.croissance))-1)
   }
 
 }
