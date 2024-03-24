@@ -62,7 +62,7 @@ let tests = [
             console.log("attendu: " + t.timeleft+", obtenu: "+product.timeleft)
         }
         if (qt == t.qt) {
-           console.log("Quantité correct")
+            console.log("attendu: " + t.timeleft+", obtenu: "+product.timeleft)
         }
         if (product.timeleft == t.timeleft) {
             console.log("Timeleft correct")

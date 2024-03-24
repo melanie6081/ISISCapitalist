@@ -13,6 +13,7 @@ function saveWorld(context) {
                     `Erreur d'écriture du monde coté serveur`)
             }
         })
+        
         updateScore(context)
         context.world.lastupdate=Date.now().toString()
 }
@@ -46,19 +47,40 @@ function calcQtProductionforElapseTime(product, elapsedTime) {
     
 function updateScore(context) {
     let gain = 0
-    let angles = 0
+
+    let time = Date.now() - Number(context.world.lastupdate)
     context.world.products.forEach(p => {
-        let time = Date.now() - Number(context.world.lastupdate)
+        
+        console.log(time)
+       
         let qt = calcQtProductionforElapseTime(p, time)
-        gain += qt * p.revenu
+        
+        gain += qt * p.revenu +(1 * context.world.activeangels * context.world.angelbonus / 100)
+        
     })
     
-    context.world.money += gain
+    context.world.money += gain 
     context.world.score += gain
-    context.world.totalangels += 1
-
+    context.world.totalangels = 150*Math.pow((score/Math.pow(10, 15)),0.5) - context.world.totalangels
+    context.world.activeangels = 150*Math.pow((score/Math.pow(10, 15)),0.5) - context.world.activeangels
     context.world.lastupdate = Date.now().toString()
     
+}
+
+
+
+function unlockUpgrade(product){
+    product.paliers.forEach( p => {
+        if(!p.unlocked && product.quantite >= p.seuil){
+            if(p.typeratio === "gain"){
+                product.revenu *= p.ratio;
+            }
+            if(p.typeratio === "vitesse"){
+                product.vitesse /= p.ratio;
+            }
+            p.unlocked = true; // Marquer le palier comme déverrouillé
+        }
+    });
 }
 
 
@@ -84,7 +106,8 @@ module.exports = {
                 if (context.world.money >= prix) {
                     product.quantite += args.quantite
                     context.world.money -= prix
-                    product.cout = product.cout * (Math.pow(product.croissance, args.quantite))                 
+                    product.cout = product.cout * (Math.pow(product.croissance, args.quantite)) 
+                    unlockUpgrade(product)                
                     context.world.lastupdate = date             
                     saveWorld(context)
                     return product
@@ -136,19 +159,31 @@ module.exports = {
                 throw new Error(
                     `L'upgrade avec l'id ${args.id} n'existe pas`)
             }
-            else{ 
-                
+            else{    
                 if (context.world.money >= args.sueil) {
-                    context.world.money -= args.prix
-                    upgrade.unlocked = true
-                    if(args.typeratio=="gain"){
-                        product.revenu = upgrade.ratio*product.revenu
-                    }
-                    if(args.typeratio=="vitesse"){
-                        product.revenu = product.vitesse/upgrade.ratio
-                    }
-                    saveWorld(context)
-                    return product
+                    unlockUpgrade(product)
+                }
+                else{
+                    throw new Error(
+                        `Pas assez d'argent pour ${args.quantite} ${product.name}`)
+                }   
+            }
+            let date = Date.now().toString()
+            context.world.lastupdate = date
+            saveWorld(context)
+
+        },
+        acheterAngelUpgrade(parent, args, context){
+            updateScore(contexte)
+            let upgrade = context.world.upgrades.find(p => p.id == args.id)
+            let product = context.world.products.find(p => p.id == upgrade.idcible)
+            if (!upgrade) {
+                throw new Error(
+                    `L'upgrade avec l'id ${args.id} n'existe pas`)
+            }
+            else{    
+                if (context.world.money >= args.sueil) {
+                    unlockUpgrade(product)
                 }
                 else{
                     throw new Error(
@@ -164,10 +199,6 @@ module.exports = {
             world.activeangels = context.world.activeangels
             saveWorld(context)
             return world
-            
-
-          
-
         }
 
         
