@@ -51,8 +51,8 @@ module.exports = {
         },
         {
             "id": 2,
-            "name": "Bouchon d'oreilles",
-            "logo": "icones/bouchondoreille.png",
+            "name": "Casque de sommeil",
+            "logo": "icones/casque.jpg",
             "cout": 8000,
             "croissance": 1.07,
             "revenu": 9000,
@@ -62,8 +62,8 @@ module.exports = {
             "managerUnlocked": false,
             "paliers": [
                 {
-                    "name": "Benef bouchondoreille x3",
-                    "logo": "icones/bouchondoreille.png",
+                    "name": "Casque de sommeil x3",
+                    "logo": "icones/casque.jpg",
                     "seuil": 25,
                     "idcible": 2,
                     "ratio": 3,
@@ -71,8 +71,8 @@ module.exports = {
                     "unlocked": false
                 },
                 {
-                    "name": "Vitesse bouchondoreille x3",
-                    "logo": "icones/bouchondoreille.png",
+                    "name": "Casque de sommeil x3",
+                    "logo": "icones/casque.jpg",
                     "seuil": 50,
                     "idcible": 2,
                     "ratio": 3,
@@ -80,8 +80,8 @@ module.exports = {
                     "unlocked": false
                 },
                 {
-                    "name": "Benef bouchondoreille x3",
-                    "logo": "icones/bouchondoreille.png",
+                    "name": "Casque de sommeil x3",
+                    "logo": "icones/casque.jpg",
                     "seuil": 100,
                     "idcible": 2,
                     "ratio": 3,
@@ -94,7 +94,7 @@ module.exports = {
         {
             "id": 3,
             "name": "Lampe de chevet",
-            "logo": "icones/bouchondoreille.png",
+            "logo": "icones/lampedechet.png",
             "cout": 8000,
             "croissance": 1.07,
             "revenu": 9000,
@@ -105,7 +105,7 @@ module.exports = {
             "paliers": [
                 {
                     "name": "Benef lampe de chevet x3",
-                    "logo": "icones/bouchondoreille.png",
+                    "logo": "icones/lampedechet.png",
                     "seuil": 25,
                     "idcible": 3,
                     "ratio": 3,
@@ -114,7 +114,7 @@ module.exports = {
                 },
                 {
                     "name": "Vitesse lampe de chevet x3",
-                    "logo": "icones/bouchondoreille.png",
+                    "logo": "icones/lampedechet.png",
                     "seuil": 50,
                     "idcible": 3,
                     "ratio": 3,
@@ -123,7 +123,7 @@ module.exports = {
                 },
                 {
                     "name": "Benef lampe de chevet x3",
-                    "logo": "icones/bouchondoreille.png",
+                    "logo": "icones/lampedechet.png",
                     "seuil": 100,
                     "idcible": 3,
                     "ratio": 3,
@@ -138,12 +138,21 @@ module.exports = {
         {
         "name": "Nom du premier unlock général",
         "logo": "icones/premierunlock.jpg",
-        "seuil": 30,
+        "seuil": 100,
         "idcible": 0,
-        "ratio": 2,
+        "ratio": 3,
         "typeratio": "gain",
         "unlocked": false
         },
+        {
+            "name": "Nom du deuxième unlock général",
+            "logo": "icones/premierunlock.jpg",
+            "seuil": 1000,
+            "idcible": 0,
+            "ratio": 3,
+            "typeratio": "gain",
+            "unlocked": false
+            },
         ], 
     "upgrades": [
         {
