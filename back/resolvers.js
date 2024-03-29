@@ -51,7 +51,7 @@ function updateScore(context) {
     let time = Date.now() - Number(context.world.lastupdate)
     context.world.products.forEach(p => {
         
-        console.log(time)
+        
        
         let qt = calcQtProductionforElapseTime(p, time)
         
@@ -61,8 +61,9 @@ function updateScore(context) {
     
     context.world.money += gain 
     context.world.score += gain
-    context.world.totalangels = 150*Math.pow((score/Math.pow(10, 15)),0.5) - context.world.totalangels
-    context.world.activeangels = 150*Math.pow((score/Math.pow(10, 15)),0.5) - context.world.activeangels
+    context.world.totalangels = Math.floor(150*Math.pow((context.world.score/Math.pow(10, 15)),0.5) - context.world.totalangels)
+    console.log(150*Math.pow((context.world.score/Math.pow(10, 15)),0.5) - context.world.totalangels)
+    context.world.activeangels = Math.floor(150*Math.pow((context.world.score/Math.pow(10, 15)),0.5) - context.world.activeangels)
     context.world.lastupdate = Date.now().toString()
     
 }
@@ -78,10 +79,19 @@ function unlockUpgrade(product){
             if(p.typeratio === "vitesse"){
                 product.vitesse /= p.ratio;
             }
-            p.unlocked = true; // Marquer le palier comme déverrouillé
+            p.unlocked = true;
         }
     });
 }
+
+
+
+
+
+
+
+
+
 
 
 module.exports = {
@@ -95,7 +105,7 @@ module.exports = {
         acheterQtProduit(parent, args, context) {
           updateScore(context)
           let product = context.world.products.find(p => p.id == args.id)
-           
+
             if (!product) {
                 throw new Error(
                     `Le produit avec l'id ${args.id} n'existe pas`)
@@ -105,9 +115,11 @@ module.exports = {
                 let date = Date.now().toString()
                 if (context.world.money >= prix) {
                     product.quantite += args.quantite
+
                     context.world.money -= prix
-                    product.cout = product.cout * (Math.pow(product.croissance, args.quantite)) 
-                    unlockUpgrade(product)                
+                    product.cout = product.cout * (Math.pow(product.croissance, args.quantite))
+                    unlockUpgrade(product)
+                    
                     context.world.lastupdate = date             
                     saveWorld(context)
                     return product
@@ -146,48 +158,58 @@ module.exports = {
                 let date = Date.now().toString()
                 manager.unlocked = true
                 product.managerUnlocked = true
+                context.world.money -= manager.seuil
                 context.world.lastupdate = date
                 saveWorld(context)
             }
             return manager
         },
         acheterCashUpgrade(parent, args, context){
-            updateScore(contexte)
-            let upgrade = context.world.upgrades.find(p => p.id == args.id)
+            updateScore(context)
+            let upgrade = context.world.upgrades.find(p => p.name == args.name)
             let product = context.world.products.find(p => p.id == upgrade.idcible)
             if (!upgrade) {
                 throw new Error(
-                    `L'upgrade avec l'id ${args.id} n'existe pas`)
+                    `L'upgrade avec l'id ${args.name} n'existe pas`)
             }
-            else{    
-                if (context.world.money >= args.sueil) {
-                    unlockUpgrade(product)
+            else{
+                let date = Date.now().toString()
+                if (context.world.money >= upgrade.seuil) {
+                    if(upgrade.typeratio === "gain"){
+                        product.revenu *= upgrade.ratio;
+                    }
+                    if(upgrade.typeratio === "vitesse"){
+                        product.vitesse = Math.floor(product.vitesse/upgrade.ratio);
+                    }
+                    upgrade.unlocked = true
+                    context.world.lastupdate = date
+                    saveWorld(context)
                 }
                 else{
                     throw new Error(
-                        `Pas assez d'argent pour ${args.quantite} ${product.name}`)
+                        `Pas assez d'argent pour ${args.name}`)
                 }   
             }
-            let date = Date.now().toString()
-            context.world.lastupdate = date
-            saveWorld(context)
-
         },
         acheterAngelUpgrade(parent, args, context){
-            updateScore(contexte)
-            let upgrade = context.world.upgrades.find(p => p.id == args.id)
-            let product = context.world.products.find(p => p.id == upgrade.idcible)
+            updateScore(context)
+            let upgrade = context.world.angelupgrades.find(p => p.name == args.name)
             if (!upgrade) {
                 throw new Error(
-                    `L'upgrade avec l'id ${args.id} n'existe pas`)
+                    `L'upgrade avec l'id ${args.name} n'existe pas`)
             }
-            else{    
-                if (context.world.money >= args.sueil) {
-                    unlockUpgrade(product)
+            else{
+                let date = Date.now().toString() 
+                   
+                if (context.world.activeangels >= upgrade.seuil) {
+                    context.world.activeangels -= upgrade.seuil
+                    unlockUpgrade(upgrade)
+                    context.world.lastupdate = date
+                    saveWorld(context)
                 }
                 else{
                     throw new Error(
-                        `Pas assez d'argent pour ${args.quantite} ${product.name}`)
+                        `Vous n'avez que ${context.world.activeangels} anges au lieu de ${args.seuil}`)
                 }   
             }
 
@@ -197,6 +219,7 @@ module.exports = {
             context.world = world
             world.totalangels = context.world.totalangels
             world.activeangels = context.world.activeangels
+            
             saveWorld(context)
             return world
         }
