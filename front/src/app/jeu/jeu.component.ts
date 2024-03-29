@@ -97,6 +97,10 @@ console.log("coucou")
     this.world.score = this.world.score + (p.revenu * p.quantite)
   }
 
+  onAchatDone({qt,product}:{"qt":number,"product":Product}) {
+    this.world.money = this.world.money - (product.cout * ((Math.pow(product.croissance,qt)-1)/(product.croissance -1)))
+  }
+
   show():boolean{
     if(this.showManagers==true){
       return this.showManagers=false
