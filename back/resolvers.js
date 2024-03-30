@@ -77,7 +77,8 @@ function unlockUpgrade(product){
                 product.revenu *= p.ratio;
             }
             if(p.typeratio === "vitesse"){
-                product.vitesse /= p.ratio;
+                product.vitesse = Math.floor(product.vitesse/upgrade.ratio);
+                product.timeleft = Math.floor(product.timeleft/upgrade.ratio);
             }
             p.unlocked = true;
         }
@@ -180,6 +181,7 @@ module.exports = {
                     }
                     if(upgrade.typeratio === "vitesse"){
                         product.vitesse = Math.floor(product.vitesse/upgrade.ratio);
+                        product.timeleft = Math.floor(product.timeleft/upgrade.ratio);
                     }
                     upgrade.unlocked = true
                     context.world.lastupdate = date

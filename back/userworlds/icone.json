@@ -1,12 +1,12 @@
-module.exports = {
+{
     "name": "Slippy capitalist",
     "logo": "icones/logomonde.jpg",
-    "money": 0,
-    "score": 0,
+    "money": 7965,
+    "score": 8075,
     "totalangels": 0,
     "activeangels": 0,
     "angelbonus": 2,
-    "lastupdate": 0,
+    "lastupdate": "1711807302176",
     "products": [
         {
             "id": 1,
@@ -14,11 +14,11 @@ module.exports = {
             "logo": "icones/oreiller.jpg",
             "cout": 10,
             "croissance": 1.07,
-            "revenu": 15,
+            "revenu": 45,
             "vitesse": 1000,
             "quantite": 1,
-            "timeleft": 0,
-            "managerUnlocked": false,
+            "timeleft": 879,
+            "managerUnlocked": true,
             "paliers": [
                 {
                     "name": "Benef oreiller douillet x3",
@@ -46,18 +46,18 @@ module.exports = {
                     "ratio": 3,
                     "typeratio": "gain",
                     "unlocked": false
-                },
+                }
             ]
         },
         {
             "id": 2,
             "name": "Couverture chauffante",
             "logo": "icones/couverture.jpg",
-            "cout": 100,
+            "cout": 107,
             "croissance": 1.07,
             "revenu": 150,
             "vitesse": 3000,
-            "quantite": 0,
+            "quantite": 1,
             "timeleft": 0,
             "managerUnlocked": false,
             "paliers": [
@@ -87,8 +87,7 @@ module.exports = {
                     "ratio": 3,
                     "typeratio": "gain",
                     "unlocked": false
-                },
-
+                }
             ]
         },
         {
@@ -129,8 +128,7 @@ module.exports = {
                     "ratio": 3,
                     "typeratio": "gain",
                     "unlocked": false
-                },
-
+                }
             ]
         },
         {
@@ -171,8 +169,7 @@ module.exports = {
                     "ratio": 3,
                     "typeratio": "gain",
                     "unlocked": false
-                },
-
+                }
             ]
         },
         {
@@ -213,8 +210,7 @@ module.exports = {
                     "ratio": 3,
                     "typeratio": "gain",
                     "unlocked": false
-                },
-
+                }
             ]
         },
         {
@@ -255,10 +251,9 @@ module.exports = {
                     "ratio": 3,
                     "typeratio": "gain",
                     "unlocked": false
-                },
-
+                }
             ]
-        },
+        }
     ],
     "allunlocks": [
         {
@@ -287,7 +282,7 @@ module.exports = {
             "ratio": 3,
             "typeratio": "gain",
             "unlocked": false
-        },
+        }
     ],
     "upgrades": [
         {
@@ -295,9 +290,9 @@ module.exports = {
             "logo": "icones/oreiller.jpg",
             "seuil": 100,
             "idcible": 1,
-            "ratio": 10,
+            "ratio": 3,
             "typeratio": "gain",
-            "unlocked": false
+            "unlocked": true
         },
         {
             "name": "Vitesse couverture x10",
@@ -352,7 +347,7 @@ module.exports = {
             "ratio": 3,
             "typeratio": "gain",
             "unlocked": false
-        },
+        }
     ],
     "angelupgrades": [
         {
@@ -381,7 +376,7 @@ module.exports = {
             "ratio": 5,
             "typeratio": "gain",
             "unlocked": false
-        },
+        }
     ],
     "managers": [
         {
@@ -391,7 +386,7 @@ module.exports = {
             "idcible": 1,
             "ratio": 0,
             "typeratio": "gain",
-            "unlocked": false
+            "unlocked": true
         },
         {
             "name": "Lee Thargic",
@@ -419,7 +414,7 @@ module.exports = {
             "ratio": 0,
             "typeratio": "gain",
             "unlocked": false
-        }, 
+        },
         {
             "name": "Cecile Encieux",
             "logo": "icones/cecileencieux.png",
@@ -428,7 +423,7 @@ module.exports = {
             "ratio": 0,
             "typeratio": "gain",
             "unlocked": false
-        }, 
+        },
         {
             "name": "Ibra Demorphet",
             "logo": "icones/ibrademorphet.jpg",
@@ -437,6 +432,6 @@ module.exports = {
             "ratio": 0,
             "typeratio": "gain",
             "unlocked": false
-        },    
-    ],
+        }
+    ]
 }
