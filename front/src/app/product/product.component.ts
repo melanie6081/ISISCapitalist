@@ -19,6 +19,7 @@ export class ProductComponent implements OnInit{
 product : Product = new Product()
 
 max : number = 0
+multiValue : number = 1
 
   @Input()
     set prod(value: Product) {
@@ -36,6 +37,11 @@ max : number = 0
     set qtmulti(value: string) {
     this._qtmulti = value;
     if (this._qtmulti && this.product) this.calcMaxCanBuy();
+    if(this.qtmulti=="x1") this.multiValue = 1;
+    if(this.qtmulti=="x10") this.multiValue = 10;
+    if(this.qtmulti=="x100") this.multiValue = 100;
+    if(this.qtmulti=="prochain palier") this.multiValue = this.prod.paliers[0].seuil - this.prod.quantite;
+    if(this.qtmulti=="max") this.multiValue = this.max;
   }
 
   _worldmoney : number = 0
@@ -62,13 +68,30 @@ max : number = 0
   @Output() 
   notifyProduction: EventEmitter<Product> = new EventEmitter<Product>();
 
+  @Output() 
+  notifyAchat: EventEmitter<{"qt":number,"product":Product}> = new EventEmitter();
 
   ngOnInit(){
-    setInterval(() => { this.calcScore(); }, 100);
+    setInterval(() => { this.calcScore();}, 100);
   }
 
-  maxnb(){
-    console.log(this.max)
+  buyProduit(){
+
+    if (this.max>=this.multiValue){
+      console.log("achat")
+      console.log("argent du monde : ")
+      console.log(this._worldmoney)
+      this.product.quantite += this.multiValue
+      let qt= this.product.quantite
+      let product = this.product
+        // on prévient le composant parent que ce produit a eu un cout
+      this.notifyAchat.emit({qt, product});
+      console.log("nouveau solde du monde : ")
+      console.log(this._worldmoney)
+      console.log("nouvelle quantite : ")
+      console.log(this.product.quantite)
+    }
+
   }
   
   calcScore() {

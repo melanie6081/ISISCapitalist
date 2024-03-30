@@ -3,7 +3,7 @@
     <div class="produit">
             <!--<button type="button" class="prod" (click)="startFabrication()"><img class="logop" [attr.src]= "backend+'/'+product.logo"/></button>-->
             <img (click)="startFabrication()" class="logop" [attr.src]= "backend+'/'+product.logo"/>
-            <button (click)="maxnb()"> <p>{{product.quantite}} {{product.name}} {{product.cout}}€ </p> </button>
+            <button (click)="buyProduit()"> <p>{{product.quantite}} {{product.name}} {{product.revenu}}€ </p> </button>
     </div>
 
     <mat-progress-bar class="progressbar" [value]="progressbarvalue"></mat-progress-bar>
