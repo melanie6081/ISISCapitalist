@@ -5,7 +5,7 @@ const fs = require('fs')
 const { products, lastupdate } = require('./world')
 function saveWorld(context) {
     console.log(context.user)
-    fs.writeFile("userworlds/" + context.user + "-world.json",
+    fs.writeFile("../userworlds/" + context.user + "-world.json",
         JSON.stringify(context.world), err => {
             if (err) {
                 console.error(err)

@@ -3,6 +3,7 @@ import { Product} from '../world';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { BACKEND } from '../Graphqhrequests';
 import { Orientation } from '../progressbar.component';
+import { WebserviceService } from '../webservice.service';
 
 
 @Component({
@@ -80,6 +81,10 @@ multiValue : number = 0
   @Output() 
   notifyAchat: EventEmitter<{"qt":number,"product":Product}> = new EventEmitter();
 
+  constructor(private service : WebserviceService){
+      };
+  
+
   ngOnInit(){
     setInterval(() => { this.calcScore();}, 100);
   }
@@ -138,6 +143,9 @@ multiValue : number = 0
       this.run=true
       this.product.timeleft = this.product.vitesse
       this.lastupdate = Date.now()
+      this.service.lancerProduction(this.product).catch(reason =>
+        console.log("erreur: " + reason)
+        );
    
     }
     this.run=false
