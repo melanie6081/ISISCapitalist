@@ -46,8 +46,6 @@ console.log("coucou")
   constructor(private service : WebserviceService,private title:Title,  private route: ActivatedRoute,
     private router: Router, private snackBar: MatSnackBar){
     
-    this.pseudo = localStorage.getItem("pseudo") || "Anonymous" + Math.floor(Math.random() * 100000).toString();
-    service.setUser(this.pseudo)
     service.getWorld().then(
       world => {
         this.world = world.data.getWorld;
