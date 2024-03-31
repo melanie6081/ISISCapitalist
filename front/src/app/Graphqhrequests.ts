@@ -83,9 +83,9 @@ export const GET_WORLD = gql`
 
 export const LANCER_PRODUCTION = gql`
 mutation lancerProductionProduit($id: Int!) {
-lancerProductionProduit(id: $id) {
-id
-}
+    lancerProductionProduit(id: $id) {
+        id
+    }
 }`
 
 export const ENGAGER_MANAGER = gql`
@@ -96,9 +96,9 @@ mutation engagerManager($name: String!){
 }`
 
 export const ACHAT_PRODUIT = gql`
-mutation engagerManager($name: String!){
-    engagerManager(name: $name){
-        name
+mutation acheterQtProduit($id: Int!, $quantite: Int!){
+    acheterQtProduit(id: $id, quantite: $quantite){
+        quantite
     }
 }`
 

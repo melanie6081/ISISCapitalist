@@ -104,7 +104,7 @@ export class JeuComponent implements OnInit {
   }
 
   onAchatDone({ qt, product }: { "qt": number, "product": Product }) {
-    this.world.money = this.world.money - (product.cout * ((Math.pow(product.croissance, qt - 1) - 1) / (product.croissance - 1)))
+    this.world.money = this.world.money - (product.cout * ((1-Math.pow(product.croissance, qt)) / (1-product.croissance)))
     this.managerCanBuy()
   }
 

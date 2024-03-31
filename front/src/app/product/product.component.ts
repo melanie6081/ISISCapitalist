@@ -103,7 +103,11 @@ multiValue : number = 0
       console.log("nouveau solde du monde : ")
       console.log(this._worldmoney)
       console.log("nouvelle quantite : ")
-      console.log(this.product.quantite)
+      console.log(qt)
+      this.service.achatProduit(this.product,qt).catch(reason =>
+        console.log("erreur: " + reason)
+      );
+
     }
 
   }
@@ -145,7 +149,7 @@ multiValue : number = 0
       this.lastupdate = Date.now()
       this.service.lancerProduction(this.product).catch(reason =>
         console.log("erreur: " + reason)
-        );
+      );
    
     }
     this.run=false
