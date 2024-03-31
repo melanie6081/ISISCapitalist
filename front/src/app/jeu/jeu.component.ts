@@ -98,7 +98,7 @@ console.log("coucou")
   }
 
   onAchatDone({qt,product}:{"qt":number,"product":Product}) {
-    this.world.money = this.world.money - (product.cout * ((Math.pow(product.croissance,qt)-1)/(product.croissance -1)))
+    this.world.money = this.world.money - (product.cout * ((Math.pow(product.croissance,qt-1)-1)/(product.croissance -1)))
   }
 
   show():boolean{
@@ -118,8 +118,10 @@ console.log("coucou")
     }
     else{
     this.world.money-=m.seuil
-    m.unlocked=true
-    this.produit.managerUnlocked=true
+    //m.unlocked=true
+    //this.produit.managerUnlocked=true
+    this.world.managers[m.idcible-1].unlocked = true;
+    this.world.products[m.idcible-1].managerUnlocked = true;
     let message = "Bien joué, votre production n'en sera que meilleure ;P"
     this.popMessage(message)
     }

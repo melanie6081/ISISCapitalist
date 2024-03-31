@@ -3,7 +3,8 @@
     <div class="produit">
             <!--<button type="button" class="prod" (click)="startFabrication()"><img class="logop" [attr.src]= "backend+'/'+product.logo"/></button>-->
             <img (click)="startFabrication()" class="logop" [attr.src]= "backend+'/'+product.logo"/>
-            <button (click)="buyProduit()"> <p>{{product.quantite}} {{product.name}} {{product.revenu}}€ </p> </button>
+            <span> {{product.quantite}}/{{product.paliers[0].seuil}} {{product.revenu*product.quantite}}€</span>
+            <button (click)="buyProduit()"> <p>x{{multiValue}} {{product.name}} {{product.cout}}€ </p> </button>
     </div>
 
     <mat-progress-bar class="progressbar" [value]="progressbarvalue"></mat-progress-bar>
