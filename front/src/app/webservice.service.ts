@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Client, fetchExchange } from '@urql/core';
+import { createClient, fetchExchange } from '@urql/core';
 import { BACKEND, GET_WORLD, LANCER_PRODUCTION, ENGAGER_MANAGER} from './Graphqhrequests';
 import { Product } from './world';
 
@@ -15,7 +15,7 @@ export class WebserviceService {
   }
 
   createClient(){
-    return new Client({ url : this.server,
+    return createClient({ url : this.server,
       exchanges: [fetchExchange],
       fetchOptions: () => {
         return {

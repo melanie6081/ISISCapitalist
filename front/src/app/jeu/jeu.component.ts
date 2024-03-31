@@ -46,19 +46,22 @@ console.log("coucou")
   constructor(private service : WebserviceService,private title:Title,  private route: ActivatedRoute,
     private router: Router, private snackBar: MatSnackBar){
     
+    this.pseudo = this.route.snapshot.params["pseudo"]
+    console.log(this.user.pseudo)
+    this.service.setUser(this.pseudo)
+
     service.getWorld().then(
       world => {
         this.world = world.data.getWorld;
         console.dir(this.world)
         this.title.setTitle(this.world.name)
         this.managerCanBuy()
-      });
+      }
+    );
   }
 
 
   ngOnInit() {
-    this.pseudo = this.route.snapshot.params["pseudo"]
-    console.log(this.pseudo)
     this.managerCanBuy()
   }
 

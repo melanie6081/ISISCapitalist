@@ -1,7 +1,7 @@
 module.exports = {
     "name": "Slippy capitalist",
     "logo": "icones/logomonde.jpg",
-    "money": 0,
+    "money": 15,
     "score": 0,
     "totalangels": 0,
     "activeangels": 0,
@@ -16,7 +16,7 @@ module.exports = {
             "croissance": 1.07,
             "revenu": 15,
             "vitesse": 1000,
-            "quantite": 1,
+            "quantite": 0,
             "timeleft": 0,
             "managerUnlocked": false,
             "paliers": [
