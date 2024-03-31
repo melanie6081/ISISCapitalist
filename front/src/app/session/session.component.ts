@@ -21,6 +21,7 @@ log() {
 console.log("coucou");
 }
 
+  pseudo: String = "";
   user: User = new User()
   world : World = new World()
   backend = BACKEND
@@ -57,7 +58,7 @@ console.log("coucou");
       world => {
         console.log(world);
         this.world = world.data.getWorld;
-        window.location.reload();
+        // window.location.reload();
       }
     );
   }

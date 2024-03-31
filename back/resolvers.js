@@ -4,7 +4,7 @@ const { resolveObjectURL } = require('buffer')
 const fs = require('fs')
 const { products, lastupdate } = require('./world')
 function saveWorld(context) {
-    console.log(context.user)
+    console.log("user", context.user)
     fs.writeFile("../userworlds/" + context.user + "-world.json",
         JSON.stringify(context.world), err => {
             if (err) {
@@ -62,7 +62,7 @@ function updateScore(context) {
     context.world.money += gain 
     context.world.score += gain
     context.world.totalangels = Math.floor(150*Math.pow((context.world.score/Math.pow(10, 15)),0.5) - context.world.totalangels)
-    console.log(150*Math.pow((context.world.score/Math.pow(10, 15)),0.5) - context.world.totalangels)
+    // console.log(150*Math.pow((context.world.score/Math.pow(10, 15)),0.5) - context.world.totalangels)
     context.world.activeangels = Math.floor(150*Math.pow((context.world.score/Math.pow(10, 15)),0.5) - context.world.activeangels)
     context.world.lastupdate = Date.now().toString()
     
