@@ -113,32 +113,26 @@ multiValue : number = 0
   }
   
   calcScore() {
-    let temps_passe = Date.now() - this.lastupdate
-    this.lastupdate= Date.now()
-
-    if(!this.product.managerUnlocked){
-      if (this.product.timeleft==0){return}
-      else {
-        this.product.timeleft = this.product.timeleft - temps_passe
-        if(this.product.timeleft<=0){
-          this.product.timeleft = 0
-          this.progressbarvalue = 0
-          
-          // + cout prod plus tard 
-          
-        }
-        if(this.product.timeleft>0){
-          this.progressbarvalue = ((this.product.vitesse - this.product.timeleft)/this.product.vitesse)*100
-        }
-      }
-    }else{
-      this.product.timeleft = this.product.timeleft - temps_passe
-      this.progressbarvalue = ((this.product.vitesse - this.product.timeleft)/this.product.vitesse)*100
-      setInterval(() => { this.startFabrication();}, 100);
+    if (this.product.timeleft == 0){
+      if (this.product.managerUnlocked){
+        this.startFabrication()
+      }else{return}
     }
-    // on prévient le composant parent que ce produit a généré son revenu.
-    this.notifyProduction.emit(this.product);
+    if (this.product.timeleft >0){
+      let temps_passe = Date.now() - this.lastupdate
+      this.product.timeleft -= temps_passe
+      this.lastupdate = Date.now()
+
+      if (this.product.timeleft <= 0){
+        this.product.timeleft = 0
+        this.progressbarvalue = 0
+
+        this.notifyProduction.emit(this.product);
+      }else{
+        this.progressbarvalue = ((this.product.vitesse - this.product.timeleft)/this.product.vitesse)*100
+      }
       
+    }    
   }
 
   startFabrication(){
