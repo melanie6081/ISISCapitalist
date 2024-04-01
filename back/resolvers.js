@@ -210,6 +210,7 @@ module.exports = {
                         product.vitesse = Math.floor(product.vitesse/upgrade.ratio);
                         product.timeleft = Math.floor(product.timeleft/upgrade.ratio);
                     }
+                    context.world.money -= upgrade.seuil
                     upgrade.unlocked = true
                     context.world.lastupdate = date
                     saveWorld(context)
