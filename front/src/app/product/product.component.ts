@@ -35,19 +35,6 @@ multiValue : number = 0
     }
   }
 
- /** 
-  @Input()
-  set prod(value: Product) {
-  this.product = value;
-  if (this.product && this.product.timeleft > 0) {
-  this.lastupdate = Date.now();
-  let progress = (this.product.vitesse - this.product.timeleft) /
-  this.product.vitesse;
-  this.progressbar.set(progress);
-  this.progressbar.animate(1, { duration: this.product.timeleft });
-  }}
-  * */ 
-
   @Input()
   money : number = 0
 

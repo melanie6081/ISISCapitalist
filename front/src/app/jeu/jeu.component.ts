@@ -26,7 +26,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 export class JeuComponent implements OnInit {
 
   log() {
-    console.log("coucou")
+    console.log("vue uprgade")
   }
 
   user: User = new User()
@@ -39,8 +39,13 @@ export class JeuComponent implements OnInit {
   multivalue = 1
 
   showManagers = false
+  showUnlocks = false
+  showUpgrades = false
+
 
   badgeManagers = 0
+  badgeUpgrades = 0
+
 
 
   constructor(private service: WebserviceService, private title: Title, private route: ActivatedRoute,
@@ -55,14 +60,15 @@ export class JeuComponent implements OnInit {
         console.dir(this.world)
         this.title.setTitle(this.world.name)
         this.managerCanBuy()
+        this.upgradeCanBuy()
       }
     );
   }
 
 
   ngOnInit() {
-    
     this.managerCanBuy()
+    this.upgradeCanBuy()
   }
 
   selecteur(): string {
@@ -101,14 +107,16 @@ export class JeuComponent implements OnInit {
     this.world.money = this.world.money + (p.revenu * p.quantite)
     this.world.score = this.world.score + (p.revenu * p.quantite)
     this.managerCanBuy()
+    this.upgradeCanBuy()
   }
 
   onAchatDone({ qt, product }: { "qt": number, "product": Product }) {
     this.world.money = this.world.money - (product.cout * ((1-Math.pow(product.croissance, qt)) / (1-product.croissance)))
     this.managerCanBuy()
+    this.upgradeCanBuy()
   }
 
-  show(): boolean {
+  /**show(): boolean {
     if (this.showManagers == true) {
       return this.showManagers = false
     }
@@ -117,7 +125,7 @@ export class JeuComponent implements OnInit {
     }
 
     return this.showManagers
-  }
+  }**/
 
   hireManager(m: Palier) {
     if (m.seuil > this.world.money) {
@@ -136,6 +144,21 @@ export class JeuComponent implements OnInit {
       );
     }
     this.managerCanBuy()
+    this.upgradeCanBuy()
+  }
+
+  buyUpgrade(u: Palier){
+    if (u.seuil > this.world.money) return
+    else {
+      this.world.money-= u.seuil
+      u.unlocked = true;
+      if (u.typeratio=="gain"){
+        this.world.products[u.idcible].revenu=this.world.products[u.idcible].revenu*u.ratio
+      }
+      if (u.typeratio=="vitesse"){
+        this.world.products[u.idcible].revenu=this.world.products[u.idcible].vitesse*u.ratio
+      }
+    }
   }
 
   popMessage(message: string): void {
@@ -145,10 +168,19 @@ export class JeuComponent implements OnInit {
   managerCanBuy() {
     this.badgeManagers = 0
     for (let m of this.world.managers) {
-      if (!m.unlocked && m.seuil < this.world.money) {
+      if (!m.unlocked && m.seuil <= this.world.money) {
         this.badgeManagers += 1
       }
 
+    }
+  }
+
+  upgradeCanBuy(){
+    this.badgeUpgrades = 0
+    for (let u of this.world.upgrades){
+      if(!u.unlocked && u.seuil <= this.world.money ){
+        this.badgeUpgrades+=1
+      }
     }
   }
 

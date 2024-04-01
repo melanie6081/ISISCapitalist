@@ -33,10 +33,10 @@
 
     <div class = "menu"> 
       <button mat-raised-button color="primary" [matBadge]="badgeManagers" [matBadgeHidden]="badgeManagers==0" (click)="showManagers=!showManagers"> Managers </button><br>
-      <button mat-raised-button> Bonus </button><br>
+      <button mat-raised-button color="primary" (click)="showUnlocks=!showUnlocks"> Unlocks </button><br>
       <button mat-raised-button> Investisseurs </button><br>
       <button mat-raised-button> Anges améliorations </button><br>
-      <button mat-raised-button> Argent améliorations </button>
+      <button mat-raised-button color="primary" [matBadge]="badgeUpgrades" [matBadgeHidden]="badgeUpgrades==0" (click)="showUpgrades=!showUpgrades"> Cash Upgrades </button>
     </div>
 
     <div class = "products">
@@ -62,8 +62,40 @@
           </div>
         }
       </div> 
-      
+    </div>
+
+    <div *ngIf="showUnlocks" class="modal">
+      <button class="closebutton" mat-raised-button color="primary" (click)="showUnlocks=!showUnlocks">Close</button>
+      <div><h1 class="title">Vous ne vivez que pour les profits ? Alors faites les bons investissements pour débloquer des bonus ;p</h1></div>
+      <div>
+        @for (unlock of world.allunlocks; track unlock.name){
+          <div *ngIf="!unlock.unlocked" class="contentUnlocked">
+            <div class="logo"><img class="unlocklogo" [attr.src]="backend+'/'+unlock.logo" /></div>
+            <div>
+              <div class="unlockname"> {{ unlock.name}} </div>
+              <div class="unlockseuil"> {{unlock.seuil}} </div>
+              <div class="unlockbonus"> {{world.products[unlock.idcible].name}} {{unlock.typeratio}} {{unlock.ratio}} </div>
+            </div>
+          </div>
+        }
       </div>
+
+
+      
+      <!--<div>
+        @for (unlock of world.allunlocks; track unlock.){
+          <div *ngIf="!manager.unlocked" class="contentManager">
+            <div class="logo"><img class="managerlogo" [attr.src]="backend+'/'+manager.logo" /></div>
+            <div>
+              <div class="managername"> {{ manager.name}} </div>
+              <div class="managercible"> {{ world.products[manager.idcible-1].name }} </div>
+              <div class="managercost"> {{ manager.seuil}} </div>
+            </div>
+            <div class="managerHire" (click)="hireManager(manager)" [ngClass]="{'selectable' : (world.money >= manager.seuil)}">Hire !</div>
+          </div>
+        }
+      </div> -->
+    </div>
       <!--<div class="managers">
         @for (manager of world.managers; track manager.idcible){
           <img  class="managerlogo" [attr.src]= "backend+'/'+manager.logo"/>
@@ -89,8 +121,29 @@
     </div>
     <button class="closebutton" mat-raised-
     button color="primary" (click)="showManagers = !showManagers">Close</button>
-  </div>
-  </div>-->
+    </div>
+    </div>-->
+
+    <div *ngIf="showUpgrades" class="modal">
+      <button class="closebutton" mat-raised-button color="primary" (click)="showUpgrades=!showUpgrades">Close</button>
+      <div><h1 class="title">Des petites améliorations pour vous faciliter la vie !!!</h1></div>
+      <div>
+        @for (upgrade of world.upgrades; track upgrade.name){
+          <div *ngIf="!upgrade.unlocked" class="contentUpgrade">
+            <div class="logo"><img class="upgradelogo" [attr.src]="backend+'/'+upgrade.logo" /></div>
+            <div>
+              <div class="upgradename"> {{upgrade.name}} </div>
+              <div class="upgradecible"> {{world.products[upgrade.idcible-1].name}} </div>
+              <div class="upgradetype">{{upgrade.typeratio}}</div>
+              <!--<div class="upgradecost"> {{upgrade.seuil}} </div>
+              
+              <div class="upgraderatio">{{upgrade.ratio}}</div>-->
+            </div>
+            <div class="buyUpgrade" (click)="buyUpgrade(upgrade)" [ngClass]="{'selectable' : (world.money >= upgrade.seuil)}">Hire !</div>
+          </div>
+        }
+      </div>
+    </div>
 
   </div> 
 
