@@ -27,12 +27,30 @@ multiValue : number = 0
   @Input()
     set prod(value: Product) {
     this.product = value;
-
-  if(!this.product) this.product= new Product()
-   this.product.vitesse
+    if(!this.product) this.product= new Product()
+    this.product.vitesse
+    if(this.product && this.product.timeleft > 0){
+      this.lastupdate = Date.now();
+      this.progressbarvalue = ((this.product.vitesse - this.product.timeleft) / this.product.vitesse)*100;
+    }
   }
 
+<<<<<<< HEAD
 
+=======
+ /** 
+  @Input()
+  set prod(value: Product) {
+  this.product = value;
+  if (this.product && this.product.timeleft > 0) {
+  this.lastupdate = Date.now();
+  let progress = (this.product.vitesse - this.product.timeleft) /
+  this.product.vitesse;
+  this.progressbar.set(progress);
+  this.progressbar.animate(1, { duration: this.product.timeleft });
+  }}
+  * */ 
+>>>>>>> 9d1c1a8bc6693b512cd98b89271798938f657f23
 
   @Input()
   money : number = 0
@@ -103,12 +121,17 @@ multiValue : number = 0
       console.log("nouveau solde du monde : ")
       console.log(this._worldmoney)
       console.log("nouvelle quantite : ")
-      console.log(this.product.quantite)
+      console.log(qt)
+      this.service.achatProduit(this.product,qt).catch(reason =>
+        console.log("erreur: " + reason)
+      );
+
     }
 
   }
   
   calcScore() {
+<<<<<<< HEAD
     let temps_passe = Date.now() - this.lastupdate
     this.lastupdate= Date.now()
 
@@ -134,7 +157,28 @@ multiValue : number = 0
     }
     // on prévient le composant parent que ce produit a généré son revenu.
     this.notifyProduction.emit(this.product);
+=======
+    if (this.product.timeleft == 0){
+      if (this.product.managerUnlocked){
+        this.startFabrication()
+      }else{return}
+    }
+    if (this.product.timeleft >0){
+      let temps_passe = Date.now() - this.lastupdate
+      this.product.timeleft -= temps_passe
+      this.lastupdate = Date.now()
+
+      if (this.product.timeleft <= 0){
+        this.product.timeleft = 0
+        this.progressbarvalue = 0
+
+        this.notifyProduction.emit(this.product);
+      }else{
+        this.progressbarvalue = ((this.product.vitesse - this.product.timeleft)/this.product.vitesse)*100
+      }
+>>>>>>> 9d1c1a8bc6693b512cd98b89271798938f657f23
       
+    }    
   }
 
   startFabrication(){
@@ -145,7 +189,11 @@ multiValue : number = 0
       this.lastupdate = Date.now()
       this.service.lancerProduction(this.product).catch(reason =>
         console.log("erreur: " + reason)
+<<<<<<< HEAD
         );
+=======
+      );
+>>>>>>> 9d1c1a8bc6693b512cd98b89271798938f657f23
    
     }
     this.run=false

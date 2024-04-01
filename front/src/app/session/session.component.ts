@@ -45,7 +45,20 @@ console.log("coucou");
 
   onSubmit() {
     console.log("hello")
+    if (this.user.pseudo == "") {
+      this.user.pseudo = "Anonymous" + Math.floor(Math.random() * 10000).toString();
     }
+    console.log(this.user.pseudo)
+    localStorage.setItem("username", this.user.pseudo);
+    this.service.setUser(this.user.pseudo);
 
+    this.service.getWorld().then(
+      world => {
+        console.log(world);
+        this.world = world.data.getWorld;
+        window.location.reload();
+      }
+    );
+  }
 }
 
