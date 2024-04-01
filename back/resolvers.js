@@ -99,6 +99,7 @@ module.exports = {
     Query: {
         getWorld(parent, args, context) {
             saveWorld(context)
+            console.log(context)
             return context.world
         }
     },

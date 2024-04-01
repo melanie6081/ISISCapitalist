@@ -2,9 +2,10 @@ const {gql} = require("apollo-server-express");
 module.exports = gql`
 
 enum RatioType {
-    GAIN
-    VITESSE
-    ANGE
+    
+    gain
+    vitesse
+    ange
 }
 
 type Palier {
