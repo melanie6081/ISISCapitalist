@@ -45,19 +45,23 @@ console.log("coucou")
 
   constructor(private service : WebserviceService,private title:Title,  private route: ActivatedRoute,
     private router: Router, private snackBar: MatSnackBar){
+    
+    this.pseudo = this.route.snapshot.params["pseudo"]
+    console.log(this.pseudo)
     service.getWorld().then(
       world => {
         this.world = world.data.getWorld;
         console.dir(this.world)
         this.title.setTitle(this.world.name)
+        this.managerCanBuy()
       });
   }
 
 
   ngOnInit() {
-    this.managerCanBuy()
     this.pseudo = this.route.snapshot.params["pseudo"]
     console.log(this.pseudo)
+    this.managerCanBuy()
   }
 
   selecteur(): string{
@@ -95,10 +99,12 @@ console.log("coucou")
   onProductionDone(p: Product) {
     this.world.money = this.world.money + (p.revenu * p.quantite)
     this.world.score = this.world.score + (p.revenu * p.quantite)
+    this.managerCanBuy()
   }
 
   onAchatDone({qt,product}:{"qt":number,"product":Product}) {
-    this.world.money = this.world.money - (product.cout * ((Math.pow(product.croissance,qt)-1)/(product.croissance -1)))
+    this.world.money = this.world.money - (product.cout * ((Math.pow(product.croissance,qt-1)-1)/(product.croissance -1)))
+    this.managerCanBuy()
   }
 
   show():boolean{
@@ -118,11 +124,17 @@ console.log("coucou")
     }
     else{
     this.world.money-=m.seuil
-    m.unlocked=true
-    this.produit.managerUnlocked=true
+    //m.unlocked=true
+    //this.produit.managerUnlocked=true
+    this.world.managers[m.idcible-1].unlocked = true;
+    this.world.products[m.idcible-1].managerUnlocked = true;
     let message = "Bien joué, votre production n'en sera que meilleure ;P"
     this.popMessage(message)
+    this.service.engagerManager(m).catch(reason =>
+      console.log("erreur: " + reason)
+      );
     }
+    this.managerCanBuy()
   }
 
   popMessage(message : string) : void {
@@ -130,6 +142,7 @@ console.log("coucou")
   }
 
   managerCanBuy(){
+    this.badgeManagers = 0
     for(let m of this.world.managers){
       if(!m.unlocked && m.seuil<this.world.money){
         this.badgeManagers+=1

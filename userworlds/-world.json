@@ -1,12 +1,12 @@
 {
     "name": "Slippy capitalist",
     "logo": "icones/logomonde.jpg",
-    "money": 0,
-    "score": 0,
+    "money": 30,
+    "score": 30,
     "totalangels": 0,
     "activeangels": 0,
     "angelbonus": 2,
-    "lastupdate": 0,
+    "lastupdate": "1711895952223",
     "products": [
         {
             "id": 1,

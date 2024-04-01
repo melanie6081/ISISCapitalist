@@ -3,6 +3,7 @@ import { Product} from '../world';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { BACKEND } from '../Graphqhrequests';
 import { Orientation } from '../progressbar.component';
+import { WebserviceService } from '../webservice.service';
 
 
 @Component({
@@ -17,9 +18,11 @@ export class ProductComponent implements OnInit{
 
 
 product : Product = new Product()
-
+palier : number = 0
 max : number = 0
-multiValue : number = 1
+multiValue : number = 0
+
+//cout : number = this.product.cout * ((Math.pow(this.product.croissance,this.multiValue)-1)/(this.product.croissance -1))
 
   @Input()
     set prod(value: Product) {
@@ -29,6 +32,8 @@ multiValue : number = 1
    this.product.vitesse
   }
 
+
+
   @Input()
   money : number = 0
 
@@ -37,11 +42,16 @@ multiValue : number = 1
     set qtmulti(value: string) {
     this._qtmulti = value;
     if (this._qtmulti && this.product) this.calcMaxCanBuy();
-    if(this.qtmulti=="x1") this.multiValue = 1;
-    if(this.qtmulti=="x10") this.multiValue = 10;
-    if(this.qtmulti=="x100") this.multiValue = 100;
-    if(this.qtmulti=="prochain palier") this.multiValue = this.prod.paliers[0].seuil - this.prod.quantite;
-    if(this.qtmulti=="max") this.multiValue = this.max;
+    if(this._qtmulti=="x1") this.multiValue = 1;
+    if(this._qtmulti=="x10") this.multiValue = 10;
+    if(this._qtmulti=="x100") this.multiValue = 100;
+    if(this._qtmulti=="prochain palier") {
+      if (this.product.paliers.filter((p) => p.unlocked==false).length!=0) {
+        this.multiValue = this.product.paliers.filter((p) => p.unlocked==false)[0].seuil - this.product.quantite;
+      }
+      else this.multiValue=0;
+    }
+    if(this._qtmulti=="max") this.multiValue = this.max;
   }
 
   _worldmoney : number = 0
@@ -71,6 +81,10 @@ multiValue : number = 1
   @Output() 
   notifyAchat: EventEmitter<{"qt":number,"product":Product}> = new EventEmitter();
 
+  constructor(private service : WebserviceService){
+      };
+  
+
   ngOnInit(){
     setInterval(() => { this.calcScore();}, 100);
   }
@@ -97,6 +111,7 @@ multiValue : number = 1
   calcScore() {
     let temps_passe = Date.now() - this.lastupdate
     this.lastupdate= Date.now()
+
     if(!this.product.managerUnlocked){
       if (this.product.timeleft==0){return}
       else {
@@ -106,8 +121,7 @@ multiValue : number = 1
           this.progressbarvalue = 0
           
           // + cout prod plus tard 
-          // on prévient le composant parent que ce produit a généré son revenu.
-          this.notifyProduction.emit(this.product);
+          
         }
         if(this.product.timeleft>0){
           this.progressbarvalue = ((this.product.vitesse - this.product.timeleft)/this.product.vitesse)*100
@@ -115,17 +129,23 @@ multiValue : number = 1
       }
     }else{
       this.product.timeleft = this.product.timeleft - temps_passe
+      this.progressbarvalue = ((this.product.vitesse - this.product.timeleft)/this.product.vitesse)*100
+      setInterval(() => { this.startFabrication();}, 100);
     }
+    // on prévient le composant parent que ce produit a généré son revenu.
+    this.notifyProduction.emit(this.product);
       
   }
 
   startFabrication(){
-    console.log("fabrication")
     
     if(this.product.quantite>0){
       this.run=true
       this.product.timeleft = this.product.vitesse
       this.lastupdate = Date.now()
+      this.service.lancerProduction(this.product).catch(reason =>
+        console.log("erreur: " + reason)
+        );
    
     }
     this.run=false
