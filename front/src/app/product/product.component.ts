@@ -34,10 +34,7 @@ prochainPalier : number = 0
     this.product = value;
     if(!this.product) this.product= new Product()
     this.product.vitesse
-    this.calcProchainPalier();
-    this.calcNewCout();
-    this.calcMaxCanBuy();
-    this.calcCoutTot()
+
     if(this.product && this.product.timeleft > 0){
       this.lastupdate = Date.now();
       this.progressbarvalue = ((this.product.vitesse - this.product.timeleft) / this.product.vitesse)*100;
@@ -53,8 +50,6 @@ prochainPalier : number = 0
     this._qtmulti = value;
 
     if (this._qtmulti && this.product) {
-      this.calcProchainPalier();
-      this.calcNewCout()
       this.calcMaxCanBuy();
     }
     if(this._qtmulti=="x1") this.multiValue = 1;
@@ -69,8 +64,6 @@ prochainPalier : number = 0
     if(this._qtmulti=="max") {
       this.multiValue = this.max;
     }
-    this.calcCoutTot()
-    this.calcMaxCanBuy();
   }
 
   _worldmoney : number = 0
@@ -178,7 +171,11 @@ prochainPalier : number = 0
       this.lastupdate = Date.now()
       this.service.lancerProduction(this.product).catch(reason =>
         console.log("erreur: " + reason)
+<<<<<<< HEAD
+        );
+=======
       );
+>>>>>>> 9d1c1a8bc6693b512cd98b89271798938f657f23
    
     }
     this.run=false

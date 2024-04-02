@@ -4,7 +4,7 @@ const { resolveObjectURL } = require('buffer')
 const fs = require('fs')
 const { products, lastupdate } = require('./world')
 function saveWorld(context) {
-    console.log("user", context.user)
+    console.log(context.user)
     fs.writeFile("../userworlds/" + context.user + "-world.json",
         JSON.stringify(context.world), err => {
             if (err) {
@@ -99,6 +99,7 @@ module.exports = {
     Query: {
         getWorld(parent, args, context) {
             saveWorld(context)
+            console.log(context)
             return context.world
         }
     },
@@ -106,6 +107,9 @@ module.exports = {
         acheterQtProduit(parent, args, context) {
           updateScore(context)
           let product = context.world.products.find(p => p.id == args.id)
+          const minQuantity = context.world.products.reduce((min, product) => Math.min(min, product.quantite), Infinity);
+          console.log(minQuantity)
+
 
             if (!product) {
                 throw new Error(
@@ -120,7 +124,24 @@ module.exports = {
                     context.world.money -= prix
                     product.cout = product.cout * (Math.pow(product.croissance, args.quantite))
                     unlockUpgrade(product)
-                    
+
+                    context.world.allunlocks.forEach(u => {
+                        if (!u.unlocked && minQuantity >= u.seuil) {
+                            if (u.typeratio === "gain") {
+                                context.world.products.forEach(p => {
+                                    p.revenu *= u.ratio;
+                                });
+                            }
+                            if (u.typeratio === "vitesse") {
+                                context.world.products.forEach(p => {
+                                    p.vitesse = Math.floor(p.vitesse / u.ratio);
+                                    p.timeleft = Math.floor(p.timeleft / u.ratio);
+                                });
+                            }
+                            u.unlocked = true;
+                        }
+                    });
+
                     context.world.lastupdate = date             
                     saveWorld(context)
                     return product
@@ -156,12 +177,18 @@ module.exports = {
                 throw new Error(`Le manager nommé ${args.name} n'existe pas`)
             }
             else{
+                if (context.world.money >= manager.seuil) {
                 let date = Date.now().toString()
                 manager.unlocked = true
                 product.managerUnlocked = true
                 context.world.money -= manager.seuil
                 context.world.lastupdate = date
                 saveWorld(context)
+                }
+                else{
+                    throw new Error(
+                        `Pas assez d'argent pour ${args.name}`)
+                }   
             }
             return manager
         },
@@ -183,6 +210,7 @@ module.exports = {
                         product.vitesse = Math.floor(product.vitesse/upgrade.ratio);
                         product.timeleft = Math.floor(product.timeleft/upgrade.ratio);
                     }
+                    context.world.money -= upgrade.seuil
                     upgrade.unlocked = true
                     context.world.lastupdate = date
                     saveWorld(context)

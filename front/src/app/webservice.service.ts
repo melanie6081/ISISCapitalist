@@ -9,7 +9,7 @@ import { Product } from './world';
 export class WebserviceService {
 
   server = BACKEND+'/graphql';
-  user = ' ';
+  user = 'x-user';
 
   constructor() { 
   }

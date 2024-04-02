@@ -1,7 +1,7 @@
 module.exports = {
     "name": "Slippy capitalist",
     "logo": "icones/logomonde.jpg",
-    "money": 15,
+    "money": 0,
     "score": 0,
     "totalangels": 0,
     "activeangels": 0,
@@ -16,7 +16,7 @@ module.exports = {
             "croissance": 1.07,
             "revenu": 15,
             "vitesse": 1000,
-            "quantite": 0,
+            "quantite": 1,
             "timeleft": 0,
             "managerUnlocked": false,
             "paliers": [
@@ -26,7 +26,7 @@ module.exports = {
                     "seuil": 50,
                     "idcible": 1,
                     "ratio": 3,
-                    "typeratio": "gain",
+                    "typeratio":"gain",
                     "unlocked": false
                 },
                 {
@@ -35,7 +35,7 @@ module.exports = {
                     "seuil": 500,
                     "idcible": 1,
                     "ratio": 3,
-                    "typeratio": "vitesse",
+                    "typeratio":"vitesse",
                     "unlocked": false
                 },
                 {
@@ -44,7 +44,7 @@ module.exports = {
                     "seuil": 5000,
                     "idcible": 1,
                     "ratio": 3,
-                    "typeratio": "gain",
+                    "typeratio":"gain",
                     "unlocked": false
                 },
             ]
@@ -67,7 +67,7 @@ module.exports = {
                     "seuil": 50,
                     "idcible": 2,
                     "ratio": 3,
-                    "typeratio": "gain",
+                    "typeratio":"gain",
                     "unlocked": false
                 },
                 {
@@ -76,7 +76,7 @@ module.exports = {
                     "seuil": 500,
                     "idcible": 2,
                     "ratio": 3,
-                    "typeratio": "vitesse",
+                    "typeratio":"vitesse",
                     "unlocked": false
                 },
                 {
@@ -85,7 +85,7 @@ module.exports = {
                     "seuil": 5000,
                     "idcible": 2,
                     "ratio": 3,
-                    "typeratio": "gain",
+                    "typeratio":"gain",
                     "unlocked": false
                 },
 
@@ -95,7 +95,7 @@ module.exports = {
             "id": 3,
             "name": "Matelat orthopédique",
             "logo": "icones/matelat.jpg",
-            "cout": 1000,
+            "cout": 500,
             "croissance": 1.07,
             "revenu": 5000,
             "vitesse": 30000,
@@ -109,7 +109,7 @@ module.exports = {
                     "seuil": 25,
                     "idcible": 3,
                     "ratio": 3,
-                    "typeratio": "gain",
+                    "typeratio":"gain",
                     "unlocked": false
                 },
                 {
@@ -118,7 +118,7 @@ module.exports = {
                     "seuil": 100,
                     "idcible": 3,
                     "ratio": 3,
-                    "typeratio": "vitesse",
+                    "typeratio":"vitesse",
                     "unlocked": false
                 },
                 {
@@ -127,7 +127,7 @@ module.exports = {
                     "seuil": 10000,
                     "idcible": 3,
                     "ratio": 3,
-                    "typeratio": "gain",
+                    "typeratio":"gain",
                     "unlocked": false
                 },
 
@@ -137,10 +137,10 @@ module.exports = {
             "id": 4,
             "name": "Sommier luminescent",
             "logo": "icones/sommier.jpg",
-            "cout": 100000,
+            "cout": 1000,
             "croissance": 1.07,
             "revenu": 500000,
-            "vitesse": 60000,
+            "vitesse": 10000,
             "quantite": 0,
             "timeleft": 0,
             "managerUnlocked": false,
@@ -151,7 +151,7 @@ module.exports = {
                     "seuil": 25,
                     "idcible": 3,
                     "ratio": 3,
-                    "typeratio": "gain",
+                    "typeratio":"gain",
                     "unlocked": false
                 },
                 {
@@ -160,7 +160,7 @@ module.exports = {
                     "seuil": 50,
                     "idcible": 3,
                     "ratio": 10,
-                    "typeratio": "vitesse",
+                    "typeratio":"vitesse",
                     "unlocked": false
                 },
                 {
@@ -169,7 +169,7 @@ module.exports = {
                     "seuil": 100,
                     "idcible": 3,
                     "ratio": 3,
-                    "typeratio": "gain",
+                    "typeratio":"gain",
                     "unlocked": false
                 },
 
@@ -179,9 +179,9 @@ module.exports = {
             "id": 5,
             "name": "Casque de sommeil",
             "logo": "icones/casque.jpeg",
-            "cout": 1000000,
+            "cout": 10000,
             "croissance": 1.07,
-            "revenu": 10000000,
+            "revenu": 20000,
             "vitesse": 120000,
             "quantite": 0,
             "timeleft": 0,
@@ -193,7 +193,7 @@ module.exports = {
                     "seuil": 25,
                     "idcible": 3,
                     "ratio": 3,
-                    "typeratio": "gain",
+                    "typeratio":"gain",
                     "unlocked": false
                 },
                 {
@@ -202,7 +202,7 @@ module.exports = {
                     "seuil": 50,
                     "idcible": 3,
                     "ratio": 10,
-                    "typeratio": "vitesse",
+                    "typeratio":"vitesse",
                     "unlocked": false
                 },
                 {
@@ -211,7 +211,7 @@ module.exports = {
                     "seuil": 100,
                     "idcible": 3,
                     "ratio": 3,
-                    "typeratio": "gain",
+                    "typeratio":"gain",
                     "unlocked": false
                 },
 
@@ -221,9 +221,9 @@ module.exports = {
             "id": 6,
             "name": "Capsule Anti-Gravité",
             "logo": "icones/capsule.jpg",
-            "cout": 100000000,
+            "cout": 100000,
             "croissance": 1.07,
-            "revenu": 10000000000,
+            "revenu": 300000,
             "vitesse": 360000,
             "quantite": 0,
             "timeleft": 0,
@@ -235,7 +235,7 @@ module.exports = {
                     "seuil": 25,
                     "idcible": 3,
                     "ratio": 3,
-                    "typeratio": "gain",
+                    "typeratio":"gain",
                     "unlocked": false
                 },
                 {
@@ -244,7 +244,7 @@ module.exports = {
                     "seuil": 50,
                     "idcible": 3,
                     "ratio": 3,
-                    "typeratio": "vitesse",
+                    "typeratio":"vitesse",
                     "unlocked": false
                 },
                 {
@@ -253,7 +253,7 @@ module.exports = {
                     "seuil": 100,
                     "idcible": 3,
                     "ratio": 3,
-                    "typeratio": "gain",
+                    "typeratio":"gain",
                     "unlocked": false
                 },
 
@@ -263,29 +263,29 @@ module.exports = {
     "allunlocks": [
         {
             "name": "Premier unlock général",
-            "logo": "icones/premierunlock.jpg",
-            "seuil": 100,
+            "logo": "icones/unlock.jpg",
+            "seuil": 10,
             "idcible": 0,
             "ratio": 3,
-            "typeratio": "gain",
+            "typeratio":"gain",
             "unlocked": false
         },
         {
             "name": "Deuxième unlock général",
-            "logo": "icones/premierunlock.jpg",
-            "seuil": 1000,
+            "logo": "icones/unlock.jpg",
+            "seuil": 100,
             "idcible": 0,
             "ratio": 3,
-            "typeratio": "gain",
+            "typeratio":"vitesse",
             "unlocked": false
         },
         {
             "name": "Troisième unlock général",
-            "logo": "icones/premierunlock.jpg",
-            "seuil": 10000,
+            "logo": "icones/unlock.jpg",
+            "seuil": 1000,
             "idcible": 0,
             "ratio": 3,
-            "typeratio": "gain",
+            "typeratio":"gain",
             "unlocked": false
         },
     ],
@@ -296,7 +296,7 @@ module.exports = {
             "seuil": 100,
             "idcible": 1,
             "ratio": 10,
-            "typeratio": "gain",
+            "typeratio":"gain",
             "unlocked": false
         },
         {
@@ -305,7 +305,7 @@ module.exports = {
             "seuil": 1000,
             "idcible": 2,
             "ratio": 10,
-            "typeratio": "vitesse",
+            "typeratio":"vitesse",
             "unlocked": false
         },
         {
@@ -314,7 +314,7 @@ module.exports = {
             "seuil": 5000,
             "idcible": 3,
             "ratio": 10,
-            "typeratio": "vitesse",
+            "typeratio":"vitesse",
             "unlocked": false
         },
         {
@@ -323,7 +323,7 @@ module.exports = {
             "seuil": 15000,
             "idcible": 4,
             "ratio": 15,
-            "typeratio": "vitesse",
+            "typeratio":"vitesse",
             "unlocked": false
         },
         {
@@ -332,54 +332,54 @@ module.exports = {
             "seuil": 100000,
             "idcible": 5,
             "ratio": 20,
-            "typeratio": "vitesse",
+            "typeratio":"vitesse",
             "unlocked": false
         },
         {
             "name": "Vitesse capsule x30",
-            "logo": "icones/casque.png",
+            "logo": "icones/capsule.png",
             "seuil": 1000000,
             "idcible": 1,
             "ratio": 30,
-            "typeratio": "vitesse",
+            "typeratio":"vitesse",
             "unlocked": false
         },
         {
             "name": "Sommeil total x3",
-            "logo": "icones/lampedechevet.png",
+            "logo": "icones/unlock.png",
             "seuil": 10000000,
             "idcible": 0,
             "ratio": 3,
-            "typeratio": "gain",
+            "typeratio":"gain",
             "unlocked": false
         },
     ],
     "angelupgrades": [
         {
             "name": "Angel Sacrifice",
-            "logo": "icones/angel.png",
+            "logo": "icones/angel.jpg",
             "seuil": 10,
             "idcible": 0,
             "ratio": 3,
-            "typeratio": "gain",
+            "typeratio":"ange",
             "unlocked": false
         },
         {
             "name": "Angel Selection",
-            "logo": "icones/angel.png",
+            "logo": "icones/angel.jpg",
             "seuil": 1000,
             "idcible": 0,
             "ratio": 5,
-            "typeratio": "gain",
+            "typeratio":"ange",
             "unlocked": false
         },
         {
             "name": "Divine intervention",
-            "logo": "icones/angel.png",
+            "logo": "icones/angel.jpg",
             "seuil": 10000,
             "idcible": 0,
             "ratio": 5,
-            "typeratio": "gain",
+            "typeratio":"ange",
             "unlocked": false
         },
     ],
@@ -390,7 +390,7 @@ module.exports = {
             "seuil": 10,
             "idcible": 1,
             "ratio": 0,
-            "typeratio": "gain",
+            "typeratio":"gain",
             "unlocked": false
         },
         {
@@ -399,7 +399,7 @@ module.exports = {
             "seuil": 100,
             "idcible": 2,
             "ratio": 0,
-            "typeratio": "gain",
+            "typeratio":"gain",
             "unlocked": false
         },
         {
@@ -408,7 +408,7 @@ module.exports = {
             "seuil": 500,
             "idcible": 6,
             "ratio": 0,
-            "typeratio": "gain",
+            "typeratio":"gain",
             "unlocked": false
         },
         {
@@ -417,7 +417,7 @@ module.exports = {
             "seuil": 1000,
             "idcible": 3,
             "ratio": 0,
-            "typeratio": "gain",
+            "typeratio":"gain",
             "unlocked": false
         }, 
         {
@@ -426,7 +426,7 @@ module.exports = {
             "seuil": 10000,
             "idcible": 5,
             "ratio": 0,
-            "typeratio": "gain",
+            "typeratio":"gain",
             "unlocked": false
         }, 
         {
@@ -435,7 +435,7 @@ module.exports = {
             "seuil": 100000,
             "idcible": 4,
             "ratio": 0,
-            "typeratio": "gain",
+            "typeratio":"gain",
             "unlocked": false
         },    
     ],

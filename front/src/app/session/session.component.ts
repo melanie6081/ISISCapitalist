@@ -33,7 +33,6 @@ console.log("coucou");
         console.dir(this.world)
         this.title.setTitle(this.world.name)
       });
-    
   }
 
   ngOnInit(): void {
