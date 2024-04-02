@@ -159,7 +159,8 @@ export class JeuComponent implements OnInit {
         this.popMessage(message)
       }
       if (u.typeratio=="vitesse"){
-        this.world.products[u.idcible].vitesse=this.world.products[u.idcible-1].vitesse/u.ratio
+        this.world.products[u.idcible-1].vitesse=this.world.products[u.idcible-1].vitesse/u.ratio
+        this.world.products[u.idcible-1].timeleft=this.world.products[u.idcible-1].timeleft/u.ratio
 
         let message = "Mais quelle vitesse :o !! Votre produit  "+this.world.products[u.idcible-1].name+" se fabrique en un éclair !!"
         this.popMessage(message)
