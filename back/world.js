@@ -406,7 +406,7 @@ module.exports = {
             "name": "Claire Delune",
             "logo": "icones/clairedelune.jpg",
             "seuil": 500,
-            "idcible": 6,
+            "idcible": 3,
             "ratio": 0,
             "typeratio":"gain",
             "unlocked": false
@@ -415,7 +415,7 @@ module.exports = {
             "name": "Lucie Dité",
             "logo": "icones/luciedité.jpg",
             "seuil": 1000,
-            "idcible": 3,
+            "idcible": 4,
             "ratio": 0,
             "typeratio":"gain",
             "unlocked": false
@@ -433,7 +433,7 @@ module.exports = {
             "name": "Ibra Demorphet",
             "logo": "icones/ibrademorphet.jpg",
             "seuil": 100000,
-            "idcible": 4,
+            "idcible": 6,
             "ratio": 0,
             "typeratio":"gain",
             "unlocked": false
