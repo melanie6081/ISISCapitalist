@@ -28,8 +28,12 @@ div{
     display: grid;
     height : 20%;
     grid-template-columns: 12% 48% 20% 20%;
+    background: radial-gradient(
+        cercle at -20% 20%, #1a0754 80%, currentColor 20%);
     color :aliceblue;
     font-family: 'Luckiest Guy', cursive;
+    
+    filter: drop-shadow(0 0 30px currentColor);
 }
 
 .logo{
