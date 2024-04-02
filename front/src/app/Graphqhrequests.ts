@@ -102,3 +102,13 @@ mutation acheterQtProduit($id: Int!, $quantite: Int!){
     }
 }`
 
+export const ACHAT_UPGRADE = gql`
+mutation AcheterCashUpgrade($name: String!) {
+    acheterCashUpgrade(name: $name) {
+      name
+    }
+  }
+`
+
+
+

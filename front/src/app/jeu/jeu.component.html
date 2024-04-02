@@ -1,150 +1,170 @@
-
-
 <div class="fond">
- 
   <div class="stars">
-
-    <div class = "header"> 
-
+    <div class="header">
       <div>
-        <img class="logo" [attr.src] = "backend+'/'+world.logo"/><br>
-      {{world.name}}</div>
-      <div> <span [innerHTML]="world.money | bigvalue"> </span>€</div>
-      <div> 
-        
-        <button class="multi" (click)="selecteur()">achat {{qtmulti}}</button> </div>
-      <div class="deconnexion"><div>{{pseudo}}</div>
-    
-          <a [routerLink]="['/connexion']">
-            <div  class="deconnexionlogo" > <!-- logo qui apparait aléatoirement mais bouton là-->
-            </div>         
-          </a>     
-        
-      <!--<button type="submit"><img src="../../images/deconnexion-2.png" alt="déconnexion"></button>--> 
+        <img class="logo" [attr.src] = "backend+'/'+world.logo"/>
+        <br>
+        <span class="nomWorld">{{world.name}}</span>
+      </div>
+
+      <div class="argent"> 
+        <h1><span [innerHTML]="world.money | bigvalue"></span> €</h1>
+      </div>
+
+      <div class="multiplicateur" (click)="selecteur()"> 
+        <div class="un"><mat-icon class="multi" aria-hidden="false" aria-label="multiplicateur" fontIcon="filter_drama"></mat-icon></div>    
+        <div class="deux"><span>Achat {{qtmulti}}</span></div>
+      </div>
+
+      <div class="deconnexion">
+        <div class="pseudo">{{pseudo}}</div>
+        <a [routerLink]="['/connexion']">
+          <mat-icon class="deco" aria-hidden="false" aria-label="déconnexion" fontIcon="exit_to_app"></mat-icon>    
+        </a> 
+      </div>
+
     </div>
 
+    <div class="main">
+      <div class="menu">
+        <button mat-raised-button class="boutonmenu" color="primary" [matBadge]="badgeManagers" [matBadgeHidden]="badgeManagers==0" (click)="showManagers=!showManagers"> Managers </button>
+        <button mat-raised-button class="boutonmenu" color="primary" (click)="showUnlocks=!showUnlocks"> Unlocks </button>
+        <button mat-raised-button class="boutonmenu" color="primary" (click)="showInvestors=!showInvestors"> Investors </button>
+        <button mat-raised-button class="boutonmenu" color="primary" (click)="showAngels=!showAngels"> Angel Upgrades </button>
+        <button mat-raised-button class="boutonmenu" color="primary" [matBadge]="badgeUpgrades" [matBadgeHidden]="badgeUpgrades==0" (click)="showUpgrades=!showUpgrades"> Cash Upgrades </button>
+      </div>
+
+      <div class = "products">
+        @for (product of world.products; track product.id){
+          <app-product [prod]="product" [money]="product.cout" [qtmulti]="qtmulti" [worldmoney]="world.money" (notifyProduction)="onProductionDone($event)" (notifyAchat)="onAchatDone($event)"/>
+        }
+      </div>
+
+
+      <div *ngIf="showManagers" class="modal">
+        <button mat-mini-fab class="closebutton" color="primary" (click)="showManagers=!showManagers"><mat-icon>close</mat-icon></button>
+        <div><h1 class="title">Managers make you feel better !</h1></div>
+        @for (manager of world.managers; track manager.idcible){
+          <div *ngIf="!manager.unlocked" class="contentManager">
+            <mat-card class="manager">
+              <mat-card-content >
+                <div class="content">
+                  <div>
+                    <img class="managerlogo" [attr.src]="backend+'/'+manager.logo" />
+                  </div>
+                  <div>
+                    <div><span class="managername"> {{manager.name}} </span></div>
+                    <div><span class="managercost"> {{manager.seuil}} €</span></div>
+                    <div><span class="managercible">Pour automatiser votre production du produit {{ world.products[manager.idcible-1].name }} </span></div>
+                    
+                  </div>
+
+                </div>
+              </mat-card-content>
+              <button mat-raised-button color="primary" (click)="hireManager(manager)" [ngClass]="{'selectable':(world.money >= manager.seuil)}"> Hire ! </button>
+            </mat-card>
+          </div>
+        }
+        <button mat-raised-button color="primary" (click)="showManagers=!showManagers">Close</button>
+
+      </div>
+
+      <div *ngIf="showUnlocks" class="modal">
+        <button mat-mini-fab class="closebutton" color="primary" (click)="showUnlocks=!showUnlocks"><mat-icon>close</mat-icon></button>
+        <div><h1 class="title">Vous ne vivez que pour les profits ? Alors faites les bons investissements pour débloquer des bonus ;p</h1></div>
+        <div>
+          @for (unlock of world.allunlocks; track unlock.name){
+            <div *ngIf="!unlock.unlocked" class="contentUnlocked">
+              <mat-card class="unlock">
+                <mat-card-content >
+                  <div class="content">
+                    <div><img class="unlocklogo" [attr.src]="backend+'/'+unlock.logo" /></div>
+                    <div>
+                      <div class="unlockname"> {{ unlock.name}} </div>
+                      <div class="unlockseuil"> {{unlock.seuil}}</div>
+                      <div class="unlockbonus"> {{world.products[unlock.idcible].name}} {{unlock.typeratio}} {{unlock.ratio}} </div>
+                    </div>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </div>
+          }
+          <button mat-raised-button color="primary" (click)="showUnlocks=!showUnlocks">Close</button>
+        </div>
+      </div>
+
+      <div *ngIf="showUpgrades" class="modal">
+        <button mat-mini-fab class="closebutton" color="primary" (click)="showUpgrades=!showUpgrades"><mat-icon>close</mat-icon></button>
+        <div><h1 class="title">Des petites améliorations pour vous faciliter la vie !!!</h1></div>
+        <div>
+          @for (upgrade of world.upgrades; track upgrade.name){
+            <div *ngIf="!upgrade.unlocked" class="contentUpgrade">
+              <mat-card class="upgrade">
+                <mat-card-content >
+                  <div class="content">
+                    <div><img class="upgradelogo" [attr.src]="backend+'/'+upgrade.logo" /></div>
+                    <div>
+                      <div class="upgradename"> {{upgrade.name}} </div>
+                      <div class="upgradecost"> {{upgrade.seuil}}€</div>
+                      <div class="upgradecible"> Augmenter de {{upgrade.ratio}} votre {{upgrade.typeratio}} pour le produit {{world.products[upgrade.idcible-1].name}} </div>
+                    </div>
+                  </div>
+                </mat-card-content>
+                <button mat-raised-button color="primary" (click)="buyUpgrade(upgrade)" [ngClass]="{'selectable' : (world.money >= upgrade.seuil)}">Buy !</button>
+              </mat-card>
+              
+            </div>
+          }
+          <button mat-raised-button color="primary" (click)="showUpgrades=!showUpgrades">Close</button>
+        </div>
+      </div>
+
+      <div *ngIf="showInvestors" class="modal">
+        <button mat-mini-fab class="closebutton" color="primary" (click)="showInvestors=!showInvestors"><mat-icon>close</mat-icon></button>
+        <div><h1 class="title">Les investisseurs angéliques</h1></div>
+        <div class="content">
+          <div>
+            <div><span>Le monde {{world.name}} de {{pseudo}} totalise {{world.activeangels}} anges actifs</span></div>
+            <div><span>Sachant que chaque ange représente un bonus de {{world.angelbonus}}% sur votre revenu</span></div>
+          </div>
+          <div>
+            <button mat-raised-button color="warn">
+              <div><span>Récupérer {{world.totalangels}} anges</span></div>
+              <div><span>Redémarrer le monde</span></div>
+            </button>
+          </div>
+        </div>
+        <button mat-raised-button color="primary" (click)="showInvestors=!showInvestors">Close</button>
+      </div>
+
+      <div *ngIf="showAngels" class="modal">
+        <button mat-mini-fab class="closebutton" color="primary" (click)="showAngels=!showAngels"><mat-icon>close</mat-icon></button>
+        <div><h1 class="title">Une aide divine pour vous faciliter la vie !!!</h1></div>
+        <div>
+          @for (angel of world.angelupgrades; track angel.name){
+            <div *ngIf="!angel.unlocked" class="contentAngel">
+              <mat-card class="angel">
+                <mat-card-content >
+                  <div class="content">
+                    <div><img class="angellogo" [attr.src]="backend+'/'+angel.logo" /></div>
+                    <div>
+                      <div class="angelname"> {{angel.name}} </div>
+                      <div class="angelcost"> {{angel.seuil}} anges</div>
+                      <div class="angelcible"> Augmenter de {{angel.ratio}} votre {{angel.typeratio}} pour le produit {{world.products[angel.idcible-1].name}} </div>
+                    </div>
+                  </div>
+                </mat-card-content>
+                <button mat-raised-button color="primary" (click)="buyAngel(angel)" [ngClass]="{'selectable' : (world.totalangels >= angel.seuil)}">Buy !</button>
+              </mat-card>
+              
+            </div>
+          }
+          <button mat-raised-button color="primary" (click)="showAngels=!showAngels">Close</button>
+        </div>
+      </div>
+      
+
+    </div>
     
   </div>
-    
-
-
-  <div class = "main">
-
-
-    <div class = "menu"> 
-      <button mat-raised-button color="primary" [matBadge]="badgeManagers" [matBadgeHidden]="badgeManagers==0" (click)="showManagers=!showManagers"> Managers </button><br>
-      <button mat-raised-button color="primary" (click)="showUnlocks=!showUnlocks"> Unlocks </button><br>
-      <button mat-raised-button> Investisseurs </button><br>
-      <button mat-raised-button> Anges améliorations </button><br>
-      <button mat-raised-button color="primary" [matBadge]="badgeUpgrades" [matBadgeHidden]="badgeUpgrades==0" (click)="showUpgrades=!showUpgrades"> Cash Upgrades </button>
-    </div>
-
-    <div class = "products">
-      @for (product of world.products; track product.id){
-        <app-product [prod]="product" [money]="product.cout" [qtmulti]="qtmulti" [worldmoney]="world.money" (notifyProduction)="onProductionDone($event)" (notifyAchat)="onAchatDone($event)"/>
-      }
-
-    </div>
-
-    <div *ngIf="showManagers" class="modal">
-      <button class="closebutton" mat-raised-button color="primary" (click)="showManagers=!showManagers">Close</button>
-      <div><h1 class="title">Managers make you feel better !</h1></div>
-      <div>
-        @for (manager of world.managers; track manager.idcible){
-          <div *ngIf="!manager.unlocked" class="contentManager">
-            <div class="logo"><img class="managerlogo" [attr.src]="backend+'/'+manager.logo" /></div>
-            <div>
-              <div class="managername"> {{ manager.name}} </div>
-              <div class="managercible"> {{ world.products[manager.idcible-1].name }} </div>
-              <div class="managercost"> {{ manager.seuil}} </div>
-            </div>
-            <div class="managerHire" (click)="hireManager(manager)" [ngClass]="{'selectable' : (world.money >= manager.seuil)}">Hire !</div>
-          </div>
-        }
-      </div> 
-    </div>
-
-    <div *ngIf="showUnlocks" class="modal">
-      <button class="closebutton" mat-raised-button color="primary" (click)="showUnlocks=!showUnlocks">Close</button>
-      <div><h1 class="title">Vous ne vivez que pour les profits ? Alors faites les bons investissements pour débloquer des bonus ;p</h1></div>
-      <div>
-        @for (unlock of world.allunlocks; track unlock.name){
-          <div *ngIf="!unlock.unlocked" class="contentUnlocked">
-            <div class="logo"><img class="unlocklogo" [attr.src]="backend+'/'+unlock.logo" /></div>
-            <div>
-              <div class="unlockname"> {{ unlock.name}} </div>
-              <div class="unlockseuil"> {{unlock.seuil}} </div>
-              <div class="unlockbonus"> {{world.products[unlock.idcible].name}} {{unlock.typeratio}} {{unlock.ratio}} </div>
-            </div>
-          </div>
-        }
-      </div>
-
-
-      
-      <!--<div>
-        @for (unlock of world.allunlocks; track unlock.){
-          <div *ngIf="!manager.unlocked" class="contentManager">
-            <div class="logo"><img class="managerlogo" [attr.src]="backend+'/'+manager.logo" /></div>
-            <div>
-              <div class="managername"> {{ manager.name}} </div>
-              <div class="managercible"> {{ world.products[manager.idcible-1].name }} </div>
-              <div class="managercost"> {{ manager.seuil}} </div>
-            </div>
-            <div class="managerHire" (click)="hireManager(manager)" [ngClass]="{'selectable' : (world.money >= manager.seuil)}">Hire !</div>
-          </div>
-        }
-      </div> -->
-    </div>
-      <!--<div class="managers">
-        @for (manager of world.managers; track manager.idcible){
-          <img  class="managerlogo" [attr.src]= "backend+'/'+manager.logo"/>
-          {{manager.name}}
-        }
-      </div>-->
-      <!--<div>
-      <div *ngFor="let manager of world.managers.palier">
-      <div *ngIf="!manager.unlocked" class="managerslayout">
-      <div>
-      <div class="logo"><img class="round" [attr.src]="backend+'/'+manager.logo" /> </div>
-      </div>
-      <div>
-      <div class="managername"> {{ manager.name}} </div>
-      <div class="managercible"> {{ world.products.product[manager.idcible-
-      1].name }} </div>
-      <div class="managercost"> {{ manager.seuil}} </div>
-    </div>
-    <div>
-    <div class="hirebutton" (click)="hireManager(manager)"[ngClass]="{'selectable' : (world.money >= manager.seuil)}">Hire !</div>
-    </div>
-    </div>
-    </div>
-    <button class="closebutton" mat-raised-
-    button color="primary" (click)="showManagers = !showManagers">Close</button>
-    </div>
-    </div>-->
-
-    <div *ngIf="showUpgrades" class="modal">
-      <button class="closebutton" mat-raised-button color="primary" (click)="showUpgrades=!showUpgrades">Close</button>
-      <div><h1 class="title">Des petites améliorations pour vous faciliter la vie !!!</h1></div>
-      <div>
-        @for (upgrade of world.upgrades; track upgrade.name){
-          <div *ngIf="!upgrade.unlocked" class="contentUpgrade">
-            <div class="logo"><img class="upgradelogo" [attr.src]="backend+'/'+upgrade.logo" /></div>
-            <div>
-              <div class="upgradename"> {{upgrade.name}} </div>
-              <div class="upgradecible"> {{world.products[upgrade.idcible-1].name}} </div>
-              <div class="upgradetype">{{upgrade.typeratio}}</div>
-              <!--<div class="upgradecost"> {{upgrade.seuil}} </div>
-              
-              <div class="upgraderatio">{{upgrade.ratio}}</div>-->
-            </div>
-            <div class="buyUpgrade" (click)="buyUpgrade(upgrade)" [ngClass]="{'selectable' : (world.money >= upgrade.seuil)}">Hire !</div>
-          </div>
-        }
-      </div>
-    </div>
-
-  </div> 
-
 </div>

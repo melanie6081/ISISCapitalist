@@ -1,21 +1,13 @@
+div{
+    text-align: center;
+    align-items: center;
+}
+
 .fond{
     overflow: hidden;
-}
-
-
-.logo{
-    width : 90px;
-    height : 90px;
-    border-radius : 75px;
-}
-
-.header {
-    display: grid;
-    height : 20%;
-    grid-template-columns: 12% 48% 20% 20%;
-    padding:20px;
+    height: 100%;
+    width: 100%;
     background: linear-gradient(to bottom right, #1a0754, RoyalBlue);
-    color :aliceblue;
 }
 
 .stars{
@@ -32,9 +24,66 @@
     z-index: 0;
 }
 
-div{
-    text-align: center;
-    align-items: center;
+.header {
+    display: grid;
+    height : 20%;
+    grid-template-columns: 12% 48% 20% 20%;
+    color :aliceblue;
+    font-family: 'Luckiest Guy', cursive;
+}
+
+.logo{
+    width : 125px;
+    height : 125px;
+    border-radius : 75px;
+}
+
+.nomWorld{
+    font-weight: bolder;
+    font-size: larger;
+}
+
+.argent{
+    font-size: large;
+    font-style: italic;
+}
+
+.multiplicateur {
+    position: relative;
+}
+
+.un,
+.deux {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.multi{
+    transform: scale(6.5);
+    color:rgb(175, 221, 240);
+    opacity: 30%;
+}
+
+.deux{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.deconnexion{
+    display: flex;
+    justify-content: space-around;
+}
+
+.pseudo{
+    font-size: 30px;
+    text-decoration:underline;
+}
+
+.deco{
+    color:#03e9f4;
+    transform: scale(1.5);
 }
 
 .main {
@@ -43,37 +92,27 @@ div{
     grid-template-columns: 20% 80%;
 }
 
-.products {
+.products{
+    height: 100%;
+    width: 100%;
     display: grid;
-    padding : 20px;
     grid-template-columns: 1fr 1fr 1fr;
     text-align: left;
 }
 
-
-
 .menu{
-    margin-top: 40px;
+    top:0;
     height: 100%;
-    padding : 20px;
-    background-color: aliceblue;
+    display: grid;
+    justify-content: space-around;
 }
 
-.deconnexion{
-    display: flex;
-    justify-content: center;
-    
-    /*flex-direction: column;*/
+.boutonmenu{
+    height:50px;
+    width: 250px;
 }
 
-.deconnexionlogo{
-    height: 30px;
-    width: 30px;
-    background-image: url(deconnexion.svg);
-    background-size: cover;
-    margin: 10px;
-    background-repeat: no-repeat;
-}
+
 
 .container-img{
     display:block;
@@ -91,56 +130,62 @@ div{
     transition: all 0.2s;
 }
 
-
-
-
-
 .modal {
     position:absolute; /* reste en place */
     z-index: 2; /* au dessus du reste */
     
-    height: 50%; /* hauteur */
+    height: 80%; /* hauteur */
     overflow: auto; /* barre de scroll si besoin */
-    background-color: white; /* opaque */
-    border: solid;
+    background-color: aliceblue; /* opaque */
     bottom:0; /* a 10% du haut */
-    left:0; /* a 20% de la gauche */
-    right:0
-}
+    left:20%; /* a 20% de la gauche */
+    right:0;
 
-.managerlogo{
-    height: 40px;
-    width: 40px;
-    border-radius: 75%;
-}
-
-.upgradelogo{
-    height: 40px;
-    width: 40px;
-    border-radius: 75%;
-}
-
-.multi{
-    height: 150px;
-    width: 150px;
-    background-image: url(nuage-cloud.svg);
-    background-color: transparent;
-    border-color: transparent;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-.managerHire{
-    width: 50px;
-    background-color: bisque;
+    opacity: 95%;
     
 }
 
-.managerHire :hover{
-    background-color: aqua;
+.closebutton{
+    display: flex;
+    top:2%;
+    left:2%;
 }
 
-/*.contentManager{
+.contentManager, .contentUnlocked, .contentUpgrade, .contentAngel{
+    display: flex;
     justify-content: center;
+    align-items: center;
+    width: 100%;
+    opacity: 100%;
+
 }
-*/
+
+.manager, .unlock, .upgrade, .angel{
+    height: 40%;
+    width: 60%;
+    margin-bottom: 5%;
+}
+
+.content{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.managerlogo, .unlocklogo, .upgradelogo, .angellogo{
+    height: 90px;
+    width: 90px;
+    border-radius: 75%;
+}
+
+.managername, .unlockname, .upgradename, .angelname{
+    font-size: larger;
+    font-weight: bold;
+}
+
+.managercost, .unlockseuil, .upgradecost, .angelcost{
+    font-size: larger;
+}
+
+.managercible, .unlockbonus, .upgradecible, .angelcible{
+    font-size: small;
+}

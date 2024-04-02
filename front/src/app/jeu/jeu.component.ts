@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { WebserviceService } from '../webservice.service';
 import { OperationTypeNode } from 'graphql';
@@ -13,6 +13,10 @@ import { switchMap } from 'rxjs';
 import { NgIf, NgFor, NgClass } from '@angular/common';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatBadgeModule } from '@angular/material/badge';
+import {MatButton} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import {MatCardModule} from '@angular/material/card';
 
 
 
@@ -21,7 +25,7 @@ import { MatBadgeModule } from '@angular/material/badge';
   standalone: true,
   templateUrl: './jeu.component.html',
   styleUrl: './jeu.component.css',
-  imports: [RouterOutlet, ProductComponent, SessionComponent, BigvaluePipe, RouterLink, NgIf, NgFor, NgClass, MatBadgeModule],
+  imports: [RouterOutlet, ProductComponent, SessionComponent, BigvaluePipe, RouterLink, NgIf, NgFor, NgClass, MatBadgeModule,MatButton,MatIconModule, MatBadgeModule, MatButtonModule, MatCardModule],
 })
 export class JeuComponent implements OnInit {
 
@@ -41,10 +45,13 @@ export class JeuComponent implements OnInit {
   showManagers = false
   showUnlocks = false
   showUpgrades = false
+  showInvestors = false
+  showAngels = false
 
 
   badgeManagers = 0
   badgeUpgrades = 0
+  badgeAngels = 0
 
 
 
@@ -83,12 +90,12 @@ export class JeuComponent implements OnInit {
       return this.qtmulti
     }
     if (this.qtmulti == "x100") {
-      this.qtmulti = "prochain palier"
+      this.qtmulti = "suivant"
       console.log(this.qtmulti)
       return this.qtmulti
     }
 
-    if (this.qtmulti == "prochain palier") {
+    if (this.qtmulti == "suivant") {
       this.qtmulti = "max"
       console.log(this.qtmulti)
       return this.qtmulti
@@ -111,21 +118,11 @@ export class JeuComponent implements OnInit {
   }
 
   onAchatDone({ qt, product }: { "qt": number, "product": Product }) {
+    console.log()
     this.world.money = this.world.money - (product.cout * ((1-Math.pow(product.croissance, qt)) / (1-product.croissance)))
     this.managerCanBuy()
     this.upgradeCanBuy()
   }
-
-  /**show(): boolean {
-    if (this.showManagers == true) {
-      return this.showManagers = false
-    }
-    if (this.showManagers == false) {
-      return this.showManagers = true
-    }
-
-    return this.showManagers
-  }**/
 
   hireManager(m: Palier) {
     if (m.seuil > this.world.money) {
@@ -153,16 +150,30 @@ export class JeuComponent implements OnInit {
       this.world.money-= u.seuil
       u.unlocked = true;
       if (u.typeratio=="gain"){
-        this.world.products[u.idcible].revenu=this.world.products[u.idcible].revenu*u.ratio
+        this.world.products[u.idcible-1].revenu=this.world.products[u.idcible-1].revenu*u.ratio
+        let message = "Vos revenus du produit "+this.world.products[u.idcible-1].name+" vont augmenter de manière significative !!"
+        this.popMessage(message)
       }
       if (u.typeratio=="vitesse"){
-        this.world.products[u.idcible].revenu=this.world.products[u.idcible].vitesse*u.ratio
+        this.world.products[u.idcible].vitesse=this.world.products[u.idcible-1].vitesse/u.ratio
+
+        let message = "Mais quelle vitesse :o !! Votre produit  "+this.world.products[u.idcible-1].name+" se fabrique en un éclair !!"
+        this.popMessage(message)
       }
+      this.service.achatUpgrade(u).catch(reason =>
+        console.log("erreur: " + reason)
+      );
     }
+    this.managerCanBuy()
+    this.upgradeCanBuy()
+  }
+
+  buyAngel(a:Palier){
+    
   }
 
   popMessage(message: string): void {
-    this.snackBar.open(message, "", { duration: 3000 });
+    this.snackBar.open(message, "", { duration: 5000 });
   }
 
   managerCanBuy() {
@@ -180,6 +191,15 @@ export class JeuComponent implements OnInit {
     for (let u of this.world.upgrades){
       if(!u.unlocked && u.seuil <= this.world.money ){
         this.badgeUpgrades+=1
+      }
+    }
+  }
+
+  angelCanBuy(){
+    this.badgeAngels = 0
+    for (let a of this.world.angelupgrades){
+      if(!a.unlocked && a.seuil <= this.world.totalangels ){
+        this.badgeAngels+=1
       }
     }
   }

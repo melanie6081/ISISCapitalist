@@ -309,7 +309,7 @@ module.exports = {
             "unlocked": false
         },
         {
-            "name": "Vitesse matelat x3",
+            "name": "Vitesse matelat x10",
             "logo": "icones/matelat.jpg",
             "seuil": 5000,
             "idcible": 3,

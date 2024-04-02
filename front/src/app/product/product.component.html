@@ -1,21 +1,16 @@
 
 <div class="products">
-    <div class="produit">
-            <!--<button type="button" class="prod" (click)="startFabrication()"><img class="logop" [attr.src]= "backend+'/'+product.logo"/></button>-->
-            <img (click)="startFabrication()" class="logop" [attr.src]= "backend+'/'+product.logo"/>
-            <span> {{product.quantite}}/{{product.paliers[0].seuil}} {{product.revenu*product.quantite}}€</span>
-            <button (click)="buyProduit()"> <p>x{{multiValue}} {{product.name}} {{product.cout}}€ </p> </button>
-    </div>
 
-    <mat-progress-bar class="progressbar" [value]="progressbarvalue"></mat-progress-bar>
-    
-    <!--<app-my-progress-bar [run]="run" [auto]="auto"
-            frontcolor="#008800"
-            backcolor="#FFFFFF"
-            [orientation]="orientation" 
-            [vitesse]="vitesse"
-            [initialValue]="initialValue">
-    </app-my-progress-bar>-->
+        <mat-card >
+                <mat-card-content class="produit">
+                        <img (click)="startFabrication()" class="logop" [attr.src]= "backend+'/'+product.logo"/>
+                        <span> {{product.quantite}}/{{prochainPalier}} </span>
+                        <mat-progress-bar class="progressbar" [value]="progressbarvalue"></mat-progress-bar>
+                        <span>{{product.revenu*product.quantite | bigvalue}}€</span>
+                </mat-card-content>
+                
+                <button mat-raised-button color="primary" (click)="buyProduit()"> <p>x{{multiValue}} {{product.name}} {{coutAfficher | bigvalue}}€ </p> </button>
+        </mat-card>
 
 </div>
 
