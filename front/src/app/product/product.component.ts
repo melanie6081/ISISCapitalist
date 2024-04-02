@@ -64,6 +64,7 @@ prochainPalier : number = 0
     if(this._qtmulti=="max") {
       this.multiValue = this.max;
     }
+    this.calcCoutTot();
   }
 
   _worldmoney : number = 0
@@ -71,8 +72,12 @@ prochainPalier : number = 0
     set worldmoney(value: number) {
     this._worldmoney = value;
     if (this._worldmoney && this.product) {
+      console.log("changement max")
       this.calcMaxCanBuy();
+      if(this._qtmulti=="max") this.multiValue = this.max;
     }
+    this.calcMaxCanBuy();
+    this.calcCoutTot();
   }
 
 
@@ -101,12 +106,11 @@ prochainPalier : number = 0
 
   ngOnInit(){
     setInterval(() => { this.calcScore();}, 100);
+    this.calcProchainPalier();
+    this.calcCoutTot();
   }
 
   buyProduit(){
-
-    console.log("max can buy")
-    console.log(this.max)
 
     if (this._worldmoney>=this.coutAfficher){
       console.log("cout produit")
@@ -124,10 +128,11 @@ prochainPalier : number = 0
         this.product.paliers.filter((p) => p.unlocked==false)[0].unlocked = true
       }
 
-      this.calcProchainPalier()
-      this.calcMaxCanBuy()
+      this.calcProchainPalier();
+      this.calcMaxCanBuy();
       this.calcNewCout();
       this.calcCoutTot();
+   
 
       this.service.achatProduit(this.product,qt).catch(reason =>
         console.log("erreur: " + reason)
@@ -164,21 +169,19 @@ prochainPalier : number = 0
   }
 
   startFabrication(){
-    
+    console.log("fabrication")
+    console.log(this.product.quantite)
     if(this.product.quantite>0){
       this.run=true
       this.product.timeleft = this.product.vitesse
       this.lastupdate = Date.now()
       this.service.lancerProduction(this.product).catch(reason =>
         console.log("erreur: " + reason)
-<<<<<<< HEAD
-        );
-=======
       );
->>>>>>> 9d1c1a8bc6693b512cd98b89271798938f657f23
    
     }
     this.run=false
+    this.calcMaxCanBuy();
   }
 
   popMessage(message: string): void {
@@ -213,12 +216,7 @@ prochainPalier : number = 0
   }
 
   calcNewCout(){
-    if(this.product.quantite>0){
       this.nouveaucout = this.product.cout*Math.pow(this.product.croissance,this.multiValue)
-    }
-    else{
-      this.nouveaucout = this.product.cout
-    }
     return this.nouveaucout
   }
 

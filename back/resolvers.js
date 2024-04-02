@@ -55,7 +55,7 @@ function updateScore(context) {
        
         let qt = calcQtProductionforElapseTime(p, time)
         
-        gain += qt * p.revenu +(1 * context.world.activeangels * context.world.angelbonus / 100)
+        gain += qt * (p.revenu*p.quantite) +(1 * context.world.activeangels * context.world.angelbonus / 100)
         
     })
     

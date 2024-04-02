@@ -61,7 +61,7 @@ export class JeuComponent implements OnInit {
     this.pseudo = this.route.snapshot.params["pseudo"]
     console.log("user", this.pseudo)
     this.service.setUser(this.pseudo)
->>>>>>> 9d1c1a8bc6693b512cd98b89271798938f657f23
+
     service.getWorld().then(
       world => {
         this.world = world.data.getWorld;
@@ -71,7 +71,7 @@ export class JeuComponent implements OnInit {
         this.upgradeCanBuy()
       }
     );
->>>>>>> 9d1c1a8bc6693b512cd98b89271798938f657f23
+
   }
 
 
@@ -119,14 +119,11 @@ export class JeuComponent implements OnInit {
     this.upgradeCanBuy()
   }
 
-<<<<<<< HEAD
-  onAchatDone({qt,product}:{"qt":number,"product":Product}) {
-    this.world.money = this.world.money - (product.cout * ((Math.pow(product.croissance,qt-1)-1)/(product.croissance -1)))
-=======
+
   onAchatDone({ qt, product }: { "qt": number, "product": Product }) {
     console.log()
     this.world.money = this.world.money - (product.cout * ((1-Math.pow(product.croissance, qt)) / (1-product.croissance)))
->>>>>>> 9d1c1a8bc6693b512cd98b89271798938f657f23
+
     this.managerCanBuy()
     this.upgradeCanBuy()
   }
@@ -135,18 +132,6 @@ export class JeuComponent implements OnInit {
     if (m.seuil > this.world.money) {
       return
     }
-<<<<<<< HEAD
-    else{
-    this.world.money-=m.seuil
-    //m.unlocked=true
-    //this.produit.managerUnlocked=true
-    this.world.managers[m.idcible-1].unlocked = true;
-    this.world.products[m.idcible-1].managerUnlocked = true;
-    let message = "Bien joué, votre production n'en sera que meilleure ;P"
-    this.popMessage(message)
-    this.service.engagerManager(m).catch(reason =>
-      console.log("erreur: " + reason)
-=======
     else {
       this.world.money -= m.seuil
       //m.unlocked=true
@@ -195,13 +180,7 @@ export class JeuComponent implements OnInit {
     this.snackBar.open(message, "", { duration: 5000 });
   }
 
-<<<<<<< HEAD
-  managerCanBuy(){
-    this.badgeManagers = 0
-    for(let m of this.world.managers){
-      if(!m.unlocked && m.seuil<this.world.money){
-        this.badgeManagers+=1
-=======
+
   managerCanBuy() {
     this.badgeManagers = 0
     for (let m of this.world.managers) {

@@ -1,7 +1,7 @@
 module.exports = {
     "name": "Slippy capitalist",
     "logo": "icones/logomonde.jpg",
-    "money": 0,
+    "money": 15,
     "score": 0,
     "totalangels": 0,
     "activeangels": 0,
@@ -16,7 +16,7 @@ module.exports = {
             "croissance": 1.07,
             "revenu": 15,
             "vitesse": 1000,
-            "quantite": 1,
+            "quantite": 0,
             "timeleft": 0,
             "managerUnlocked": false,
             "paliers": [
@@ -93,7 +93,7 @@ module.exports = {
         },
         {
             "id": 3,
-            "name": "Matelat orthopédique",
+            "name": "Matelas orthopédique",
             "logo": "icones/matelat.jpg",
             "cout": 500,
             "croissance": 1.07,
@@ -104,7 +104,7 @@ module.exports = {
             "managerUnlocked": false,
             "paliers": [
                 {
-                    "name": "Benef matelat orthopédique x3",
+                    "name": "Benef matelas orthopédique x3",
                     "logo": "icones/matelat.jpg",
                     "seuil": 25,
                     "idcible": 3,
@@ -113,7 +113,7 @@ module.exports = {
                     "unlocked": false
                 },
                 {
-                    "name": "Vitesse matelat orthopédique x3",
+                    "name": "Vitesse matelas orthopédique x3",
                     "logo": "icones/matelat.jpg",
                     "seuil": 100,
                     "idcible": 3,
@@ -122,7 +122,7 @@ module.exports = {
                     "unlocked": false
                 },
                 {
-                    "name": "Benef matelat orthopédique x3",
+                    "name": "Benef matelas orthopédique x3",
                     "logo": "icones/matelat.jpg",
                     "seuil": 10000,
                     "idcible": 3,
